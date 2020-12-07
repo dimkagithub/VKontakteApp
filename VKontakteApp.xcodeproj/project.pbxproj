@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A118895257979C600A58A9F /* LoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A118894257979C600A58A9F /* LoginFormController.swift */; };
 		0A42BE0125789A9F006FA3A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BE0025789A9F006FA3A9 /* AppDelegate.swift */; };
 		0A42BE0325789A9F006FA3A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BE0225789A9F006FA3A9 /* SceneDelegate.swift */; };
-		0A42BE0525789A9F006FA3A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BE0425789A9F006FA3A9 /* ViewController.swift */; };
 		0A42BE0825789A9F006FA3A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A42BE0625789A9F006FA3A9 /* Main.storyboard */; };
 		0A42BE0B25789A9F006FA3A9 /* VKontakteApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BE0925789A9F006FA3A9 /* VKontakteApp.xcdatamodeld */; };
 		0A42BE0D25789AA1006FA3A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A42BE0C25789AA1006FA3A9 /* Assets.xcassets */; };
@@ -17,10 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A118894257979C600A58A9F /* LoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormController.swift; sourceTree = "<group>"; };
 		0A42BDFD25789A9F006FA3A9 /* VKontakteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKontakteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A42BE0025789A9F006FA3A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A42BE0225789A9F006FA3A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0A42BE0425789A9F006FA3A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A42BE0725789A9F006FA3A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A42BE0A25789A9F006FA3A9 /* VKontakteApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VKontakteApp.xcdatamodel; sourceTree = "<group>"; };
 		0A42BE0C25789AA1006FA3A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,8 +60,8 @@
 			children = (
 				0A42BE0025789A9F006FA3A9 /* AppDelegate.swift */,
 				0A42BE0225789A9F006FA3A9 /* SceneDelegate.swift */,
-				0A42BE0425789A9F006FA3A9 /* ViewController.swift */,
 				0A42BE0625789A9F006FA3A9 /* Main.storyboard */,
+				0A118894257979C600A58A9F /* LoginFormController.swift */,
 				0A42BE0C25789AA1006FA3A9 /* Assets.xcassets */,
 				0A42BE0E25789AA1006FA3A9 /* LaunchScreen.storyboard */,
 				0A42BE1125789AA1006FA3A9 /* Info.plist */,
@@ -140,8 +140,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A42BE0525789A9F006FA3A9 /* ViewController.swift in Sources */,
 				0A42BE0B25789A9F006FA3A9 /* VKontakteApp.xcdatamodeld in Sources */,
+				0A118895257979C600A58A9F /* LoginFormController.swift in Sources */,
 				0A42BE0125789A9F006FA3A9 /* AppDelegate.swift in Sources */,
 				0A42BE0325789A9F006FA3A9 /* SceneDelegate.swift in Sources */,
 			);
