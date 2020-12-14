@@ -9,21 +9,16 @@ import UIKit
 
 class MyFriendsTableController: UITableViewController {
     
-    var myFriends = [
-        dale,
-        tom,
-        jerry,
-        chip,
-        bunny,
-        wolf,
-        pup,
-        leupold,
-        wallie,
-        hackwrench,
-    ]
+    enum UserStatus: String, CaseIterable {
+        case online = "В сети"
+        case offline = "Не в сети"
+        static func setRandomStatus() -> UserStatus {
+            return UserStatus.allCases[Int.random(in: 0...1)]
+        }
+    }
     
-    // MARK: - Table view data source
-
+    let myFriends = Friends.makeFriends().sorted{ $0.userName < $1.userName }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myFriends.count
     }
@@ -32,68 +27,29 @@ class MyFriendsTableController: UITableViewController {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsCell
         else { return UITableViewCell() }
-        cell.friendImage.image = myFriends[indexPath.row].image
-        cell.friendName.text = myFriends[indexPath.row].name
-        
-        // Configure the cell...
-
+        cell.friendImage.image = myFriends[indexPath.row].userAvatar
+        cell.friendName.text = myFriends[indexPath.row].userName
+        let status = UserStatus.setRandomStatus()
+        cell.friendStatus.textColor = status == .online ? .black : .lightGray
+        cell.friendStatus.text = status.rawValue
+//        switch status {
+//        case .online:
+//            cell.friendStatus.textColor = .black
+//        default:
+//            cell.friendStatus.textColor = .lightGray
+//        }
+//        cell.friendStatus.text = status.rawValue
         return cell
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            segue.identifier == "ShowUserInfo",
-            let controller = segue.destination as? FriendsCollectionController,
-            let index = tableView.indexPathForSelectedRow,
-            let image = myFriends[index.row].image
-        else { return }
-        controller.images = [image]
-        controller.names = [myFriends[index.row].name]
+        if segue.identifier == "ShowUserInfo" {
+            let controller = segue.destination as! FriendsCollectionController
+            if let index = tableView.indexPathForSelectedRow {
+                let user = myFriends[index.row]
+                controller.images = user.userImages
+            }
+        }
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

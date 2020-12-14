@@ -7,18 +7,23 @@
 
 import UIKit
 
-struct Groups {
+struct AllGroups {
     let name: String
     let image: UIImage?
 }
 
-let recordBook = Groups(name: "Книга Рекордов", image: UIImage(named: "g1"))
-let rakish90 = Groups(name: "Лихие 90-е", image: UIImage(named: "g2"))
-let fourCh = Groups(name: "4ch", image: UIImage(named: "g3"))
-let leprosarium = Groups(name: "Лепрозорий", image: UIImage(named: "g4"))
-let reddit = Groups(name: "Reddit", image: UIImage(named: "g5"))
-let apple = Groups(name: "Apple", image: UIImage(named: "g6"))
-let lepra = Groups(name: "Лепра", image: UIImage(named: "g7"))
-let mdk = Groups(name: "MDK", image: UIImage(named: "g8"))
-let fifties = Groups(name: "1950's", image: UIImage(named: "g9"))
-let habr = Groups(name: "Habr", image: UIImage(named: "g10"))
+final class Groups {
+    static func makeGroups() -> [AllGroups] {
+        let recordBook = AllGroups(name: "Книга Рекордов", image: UIImage(named: "g1"))
+        let rakish90 = AllGroups(name: "Лихие 90-е", image: UIImage(named: "g2"))
+        let fourCh = AllGroups(name: "4ch", image: UIImage(named: "g3"))
+        let leprosarium = AllGroups(name: "Лепрозорий", image: UIImage(named: "g4"))
+        let reddit = AllGroups(name: "Reddit", image: UIImage(named: "g5"))
+        let apple = AllGroups(name: "Apple", image: UIImage(named: "g6"))
+        let lepra = AllGroups(name: "Лепра", image: UIImage(named: "g7"))
+        let mdk = AllGroups(name: "MDK", image: UIImage(named: "g8"))
+        let fifties = AllGroups(name: "1950's", image: UIImage(named: "g9"))
+        let habr = AllGroups(name: "Habr", image: UIImage(named: "g10"))
+        return [recordBook, rakish90, fourCh, leprosarium, reddit, apple, lepra, mdk, fifties, habr]
+    }
+}
