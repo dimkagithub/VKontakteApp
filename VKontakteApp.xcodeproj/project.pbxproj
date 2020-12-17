@@ -15,6 +15,9 @@
 		0A42BE0B25789A9F006FA3A9 /* VKontakteApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A42BE0925789A9F006FA3A9 /* VKontakteApp.xcdatamodeld */; };
 		0A42BE0D25789AA1006FA3A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A42BE0C25789AA1006FA3A9 /* Assets.xcassets */; };
 		0A42BE1025789AA1006FA3A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A42BE0E25789AA1006FA3A9 /* LaunchScreen.storyboard */; };
+		0A5311C6258B49850087C1E7 /* ProfileCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5311C5258B49850087C1E7 /* ProfileCollectionController.swift */; };
+		0A5311CD258B4B060087C1E7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5311CC258B4B060087C1E7 /* ProfileCell.swift */; };
+		0A5311D0258B53BA0087C1E7 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5311CF258B53BA0087C1E7 /* Profile.swift */; };
 		0A671A322582378800D12B14 /* FriendsCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A671A312582378800D12B14 /* FriendsCollectionController.swift */; };
 		0A671A352582391A00D12B14 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A671A342582391A00D12B14 /* FriendCell.swift */; };
 		0A671A64258293F900D12B14 /* MyGroupsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A671A63258293F900D12B14 /* MyGroupsTableController.swift */; };
@@ -38,6 +41,9 @@
 		0A42BE0C25789AA1006FA3A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A42BE0F25789AA1006FA3A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A42BE1125789AA1006FA3A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A5311C5258B49850087C1E7 /* ProfileCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionController.swift; sourceTree = "<group>"; };
+		0A5311CC258B4B060087C1E7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		0A5311CF258B53BA0087C1E7 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0A671A312582378800D12B14 /* FriendsCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionController.swift; sourceTree = "<group>"; };
 		0A671A342582391A00D12B14 /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		0A671A63258293F900D12B14 /* MyGroupsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsTableController.swift; sourceTree = "<group>"; };
@@ -64,6 +70,7 @@
 		0A42BDF425789A9F006FA3A9 = {
 			isa = PBXGroup;
 			children = (
+				0A5311C4258B496C0087C1E7 /* Profile */,
 				0A671A6E258298C600D12B14 /* AllGroups */,
 				0A671A62258293C400D12B14 /* MyGroups */,
 				0A671A372582591300D12B14 /* Model */,
@@ -97,6 +104,15 @@
 			path = VKontakteApp;
 			sourceTree = "<group>";
 		};
+		0A5311C4258B496C0087C1E7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0A5311C5258B49850087C1E7 /* ProfileCollectionController.swift */,
+				0A5311CC258B4B060087C1E7 /* ProfileCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		0A671A2B2582373200D12B14 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				0A671A722582AF8F00D12B14 /* Users.swift */,
+				0A5311CF258B53BA0087C1E7 /* Profile.swift */,
 				0A671A752582AF9E00D12B14 /* Groups.swift */,
 			);
 			path = Model;
@@ -213,13 +230,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A5311CD258B4B060087C1E7 /* ProfileCell.swift in Sources */,
 				0A42BE0B25789A9F006FA3A9 /* VKontakteApp.xcdatamodeld in Sources */,
 				0A671A64258293F900D12B14 /* MyGroupsTableController.swift in Sources */,
 				0AFB3CDF258224D4004BC481 /* FriendsCell.swift in Sources */,
 				0AFB3CD725822104004BC481 /* MyFriendsTableController.swift in Sources */,
 				0A671A762582AF9E00D12B14 /* Groups.swift in Sources */,
 				0A671A732582AF8F00D12B14 /* Users.swift in Sources */,
+				0A5311D0258B53BA0087C1E7 /* Profile.swift in Sources */,
 				0A1ECAAB25853F6E00AE7ED8 /* ImageViewModification.swift in Sources */,
+				0A5311C6258B49850087C1E7 /* ProfileCollectionController.swift in Sources */,
 				0A671A352582391A00D12B14 /* FriendCell.swift in Sources */,
 				0A671A6C2582943900D12B14 /* GroupsCell.swift in Sources */,
 				0A671A322582378800D12B14 /* FriendsCollectionController.swift in Sources */,

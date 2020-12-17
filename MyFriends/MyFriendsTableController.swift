@@ -22,23 +22,16 @@ class MyFriendsTableController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myFriends.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let status = UserStatus.setRandomStatus()
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsCell
         else { return UITableViewCell() }
         cell.friendImage.image = myFriends[indexPath.row].userAvatar
         cell.friendName.text = myFriends[indexPath.row].userName
-        let status = UserStatus.setRandomStatus()
         cell.friendStatus.textColor = status == .online ? .black : .lightGray
         cell.friendStatus.text = status.rawValue
-//        switch status {
-//        case .online:
-//            cell.friendStatus.textColor = .black
-//        default:
-//            cell.friendStatus.textColor = .lightGray
-//        }
-//        cell.friendStatus.text = status.rawValue
         return cell
     }
     
@@ -48,8 +41,9 @@ class MyFriendsTableController: UITableViewController {
             if let index = tableView.indexPathForSelectedRow {
                 let user = myFriends[index.row]
                 controller.images = user.userImages
+                controller.title = user.userName
             }
         }
     }
-
+    
 }

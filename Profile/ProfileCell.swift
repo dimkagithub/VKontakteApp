@@ -1,20 +1,21 @@
 //
-//  FriendCell.swift
+//  ProfileCell.swift
 //  VKontakteApp
 //
-//  Created by Дмитрий on 10.12.2020.
+//  Created by Дмитрий on 17.12.2020.
 //
 
 import UIKit
 
-class FriendCell: UICollectionViewCell {
+class ProfileCell: UICollectionViewCell {
     
     @IBAction func pulseButton(_ sender: UIButton) {
         sender.pulsate()
     }
-    @IBOutlet weak var userImage: UIImageView!
-    @IBOutlet weak var likeCounter: UILabel!
+    
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeCounter: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,5 +33,4 @@ class FriendCell: UICollectionViewCell {
         likeCounter.textColor = likeButton.isSelected ? .red : .systemBlue
         likeCounter.text = likeButton.isSelected ? "1" : "0"
     }
-    
 }
