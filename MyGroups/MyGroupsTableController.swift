@@ -8,7 +8,7 @@
 import UIKit
 
 class MyGroupsTableController: UITableViewController {
-
+    
     var myGroups = [String]()
     var myGroupsImages = [UIImage]()
     
@@ -23,6 +23,7 @@ class MyGroupsTableController: UITableViewController {
         myGroups.append(group.name)
         myGroupsImages.append(group.image!)
         tableView.reloadData()
+
     }
     
     override func tableView(_ tableView: UITableView, commit editingStryle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -32,11 +33,11 @@ class MyGroupsTableController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         myGroups.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as? GroupsCell

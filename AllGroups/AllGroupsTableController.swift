@@ -8,13 +8,13 @@
 import UIKit
 
 class AllGroupsTableController: UITableViewController {
-
+    
     let allGroups = Groups.makeGroups().sorted{ $0.name < $1.name }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         allGroups.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as? GroupsCell

@@ -8,7 +8,7 @@
 import UIKit
 
 class LoginFormController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Жест нажатия
@@ -35,7 +35,7 @@ class LoginFormController: UIViewController {
         self.scrollView?.contentInset = contentInsets
         scrollView?.scrollIndicatorInsets = contentInsets
     }
-
+    
     //Когда клавиатура исчезает
     @objc func keyboardWillBeHidden(notification: Notification) {
         // Устанавливаем отступ внизу UIScrollView, равный 0
@@ -50,7 +50,7 @@ class LoginFormController: UIViewController {
         // Второе — когда она пропадает
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -64,7 +64,7 @@ class LoginFormController: UIViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // Проверяем данные
         let checkResult = checkUserData()
-
+        
         // Если данные не верны, покажем ошибку
         if !checkResult {
             showLoginError()
@@ -89,7 +89,7 @@ class LoginFormController: UIViewController {
             return false
         }
     }
-        
+    
     func showLoginError() {
         // Создаем контроллер
         let alter = UIAlertController(title: "Ошибка", message: "Введены неверные данные пользователя", preferredStyle: .alert)
