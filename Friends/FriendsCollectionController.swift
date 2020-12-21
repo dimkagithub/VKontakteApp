@@ -10,9 +10,17 @@ import UIKit
 class FriendsCollectionController: UICollectionViewController {
     
     let itemPerRow: CGFloat = 1.0
-    let sectionInserts = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+    let sectionInserts = UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
     
     var images = [UIImage?]()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pickFriendImage" {
+            let imageVC = segue.destination as! ProfileViewController
+            let cell = sender as! FriendCell
+            imageVC.image = cell.userImage.image
+        }
+    }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

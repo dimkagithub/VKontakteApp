@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageViewModificationOne: UIImageView {
+class SetImageRadius: UIImageView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -16,7 +16,7 @@ class ImageViewModificationOne: UIImageView {
     }
 }
 
-class ImageViewModificationTwo: UIImageView {
+class SetImageShadow: UIImageView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
