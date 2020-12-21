@@ -13,8 +13,8 @@ class ProfileCollectionController: UICollectionViewController {
     
     let disneyImages = ["p1","p2","p3","p4","p5","p6","p7","p8","p9","p10",]
     
-    let itemPerRow: CGFloat = 2.0
-    let sectionInserts = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+    let itemPerRow: CGFloat = 1.0
+    let sectionInserts = UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,14 @@ class ProfileCollectionController: UICollectionViewController {
 //        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 //        layout.minimumLineSpacing = 1
 //        layout.minimumInteritemSpacing = 1
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pickProfileImage" {
+            let imageVC = segue.destination as! ProfileViewController
+            let cell = sender as! ProfileCell
+            imageVC.image = cell.profileImage.image
+        }
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -41,8 +49,6 @@ class ProfileCollectionController: UICollectionViewController {
         let imageName = disneyImages[indexPath.item]
         let image = UIImage(named: imageName)
         cell.profileImage.image = image
-        // Configure the cell
-    
         return cell
     }
 

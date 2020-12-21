@@ -12,18 +12,21 @@ class MyGroupsTableController: UITableViewController {
     var myGroups = [String]()
     var myGroupsImages = [UIImage]()
     
+    override func viewWillAppear(_ animated: Bool) {
+//        animateTable()
+    }
+    
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         guard
             segue.identifier == "addGroup",
             let controller = segue.source as? AllGroupsTableController,
             let indexPath = controller.tableView.indexPathForSelectedRow,
-            !myGroups.contains(controller.allGroups[indexPath.row].name)
+            !myGroups.contains(controller.allGroupsSections[indexPath.section].items[indexPath.row].groupName)
         else { return }
-        let group = controller.allGroups[indexPath.row]
-        myGroups.append(group.name)
-        myGroupsImages.append(group.image!)
+        let group = controller.allGroupsSections[indexPath.section].items[indexPath.row]
+        myGroups.append(group.groupName)
+        myGroupsImages.append(group.groupImage!)
         tableView.reloadData()
-
     }
     
     override func tableView(_ tableView: UITableView, commit editingStryle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

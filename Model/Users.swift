@@ -7,6 +7,20 @@
 
 import UIKit
 
+enum UserStatus: String, CaseIterable {
+    case online = "В сети"
+    case offline = "Не в сети"
+    static func setRandomStatus() -> UserStatus {
+        return UserStatus.allCases[Int.random(in: 0...1)]
+    }
+}
+
+struct MyFriendsSections {
+    var title: String
+    var items: [Users]
+    
+}
+
 struct Users {
     let userName: String
     let userAvatar: UIImage?
