@@ -9,6 +9,37 @@ import UIKit
 
 class LoginFormController: UIViewController {
     
+    @IBOutlet weak var firstDot: UIView!
+    @IBOutlet weak var secondDot: UIView!
+    @IBOutlet weak var thirdDot: UIView!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var loginInput: UITextField!
+    @IBOutlet weak var passwordInput: UITextField!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        animateDots()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            if self.checkUserData() {
+                self.performSegue(withIdentifier: "MainSegue", sender: nil)
+            } else {
+                self.showLoginError()
+            }
+        }
+    }
+    @IBAction func logoButtonAction(_ sender: Any) {
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.stiffness = 350.0
+        animation.duration = 0.7
+        imageView.layer.add(animation, forKey: nil)
+    }
+    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {}
+    var count = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Жест нажатия
@@ -17,13 +48,16 @@ class LoginFormController: UIViewController {
         scrollView?.addGestureRecognizer(hideKeyboardGesture)
     }
     
-    @IBOutlet weak var loginInput: UITextField!
-    @IBOutlet weak var passwordInput: UITextField!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBAction func loginButtonPressed(_ sender: Any) {
+    override func viewDidAppear(_ animated: Bool) {
+        count = 0
+        firstDot.layer.cornerRadius = firstDot.bounds.height / 2
+        secondDot.layer.cornerRadius = secondDot.bounds.height / 2
+        thirdDot.layer.cornerRadius = thirdDot.bounds.height / 2
+        firstDot.backgroundColor = .clear
+        secondDot.backgroundColor = .clear
+        thirdDot.backgroundColor = .clear
+        animateAppearing()
     }
-    
-    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {}
     
     // Когда клавиатура появляется
     @objc func keyboardWasShown(notification: Notification) {
@@ -49,6 +83,9 @@ class LoginFormController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
         // Второе — когда она пропадает
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        firstDot.backgroundColor = .clear
+        secondDot.backgroundColor = .clear
+        thirdDot.backgroundColor = .clear
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,18 +97,19 @@ class LoginFormController: UIViewController {
     @objc func hideKeyboard() {
         self.scrollView?.endEditing(true)
     }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        // Проверяем данные
-        let checkResult = checkUserData()
-        
-        // Если данные не верны, покажем ошибку
-        if !checkResult {
-            showLoginError()
-        }
-        // Вернем результат
-        return checkResult
-    }
+
+//    Если необходимо убрать задержку индикатора загрузки, нужно удалить Segue и протянуть связь с кнопки.
+//
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        // Проверяем данные
+//        let checkResult = checkUserData()
+//        // Если данные не верны, покажем ошибку
+//        if !checkResult {
+//            showLoginError()
+//        }
+//        // Вернем результат
+//        return checkResult
+//    }
     
     func checkUserData() -> Bool {
         loginInput.text = "admin"
@@ -101,4 +139,53 @@ class LoginFormController: UIViewController {
         present(alter, animated: true, completion: nil)
     }
     
+    func animateAppearing() {
+        self.loginInput.transform = CGAffineTransform(translationX: -self.view.bounds.height / 2, y: 0)
+        self.loginLabel.transform = CGAffineTransform(translationX: -self.view.bounds.height / 2, y: 0)
+        UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: { self.loginInput.transform = .identity
+            self.loginLabel.transform = .identity
+        }, completion: nil)
+        
+        self.passwordInput.transform = CGAffineTransform(translationX: self.view.bounds.height / 2, y: 0)
+        self.passwordLabel.transform = CGAffineTransform(translationX: self.view.bounds.height / 2, y: 0)
+        UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: { self.passwordInput.transform = .identity
+            self.passwordLabel.transform = .identity
+        }, completion: nil)
+        
+        loginButton.transform = CGAffineTransform(translationX: 0, y: 300)
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.loginButton.transform = .identity
+        }, completion: nil)
+        
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.stiffness = 350
+        animation.duration = 1.0
+        imageView.layer.add(animation, forKey: nil)
+    }
+    
+    func animateDots() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.firstDot.backgroundColor = .white
+            self.firstDot.alpha = 0
+        }) { _ in
+            self.firstDot.alpha = 1
+            UIView.animate(withDuration: 0.5, animations: {
+                self.secondDot.backgroundColor = .white
+                self.secondDot.alpha = 0
+            }) { _ in
+                self.secondDot.alpha = 1
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.thirdDot.backgroundColor = .white
+                    self.thirdDot.alpha = 0
+                }) { _ in
+                    self.thirdDot.alpha = 1
+                    if self.count < 3 {
+                        self.count += 1
+                        self.animateDots()
+                    }
+                }
+            }
+        }
+    }
 }
