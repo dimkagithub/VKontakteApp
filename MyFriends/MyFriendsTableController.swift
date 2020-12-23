@@ -26,6 +26,7 @@ class MyFriendsTableController: UITableViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск..."
+        searchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
@@ -99,6 +100,10 @@ class MyFriendsTableController: UITableViewController {
                 controller.title = friends.userName
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

@@ -26,6 +26,7 @@ class AllGroupsTableController: UITableViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск..."
+        searchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
@@ -59,7 +60,7 @@ class AllGroupsTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as? GroupsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as? AllGroupsCell
         else { return UITableViewCell() }
         var groups: AllGroups
         if filtering {

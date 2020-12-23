@@ -65,28 +65,67 @@
                                         </state>
                                         <connections>
                                             <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qt1-EQ-C8k"/>
-                                            <segue destination="TcA-iD-tvC" kind="presentation" modalPresentationStyle="fullScreen" id="Peq-uU-AH4"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izm-1q-EFM">
+                                        <rect key="frame" x="115" y="65" width="160" height="160"/>
+                                        <connections>
+                                            <action selector="logoButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rUg-bU-X4A"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAj-oE-BjX">
+                                        <rect key="frame" x="170" y="624" width="10" height="10"/>
+                                        <color key="backgroundColor" red="0.15644717220000001" green="0.52899801729999996" blue="0.95893710850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="Ud7-0H-NZX"/>
+                                            <constraint firstAttribute="height" constant="10" id="kQx-1i-oIe"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JdY-3v-2ym">
+                                        <rect key="frame" x="190" y="624" width="10" height="10"/>
+                                        <color key="backgroundColor" red="0.15644717220000001" green="0.52899801729999996" blue="0.95893710850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="fYs-78-jvP"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbL-SM-xuV">
+                                        <rect key="frame" x="210" y="624" width="10" height="10"/>
+                                        <color key="backgroundColor" red="0.15644717220000001" green="0.52899801729999996" blue="0.95893710850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="m92-rr-HtU"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fm9-eF-dOe" firstAttribute="top" secondItem="zgV-sf-FpE" secondAttribute="top" constant="65" id="1k3-3p-ToK"/>
+                                    <constraint firstItem="JdY-3v-2ym" firstAttribute="bottom" secondItem="wbL-SM-xuV" secondAttribute="bottom" id="2zE-od-PDu"/>
                                     <constraint firstAttribute="trailing" secondItem="MJA-LH-i9D" secondAttribute="trailing" constant="163" id="4Ih-OD-27n"/>
+                                    <constraint firstItem="JdY-3v-2ym" firstAttribute="centerX" secondItem="MJA-LH-i9D" secondAttribute="centerX" id="6fd-S3-C31"/>
+                                    <constraint firstItem="wbL-SM-xuV" firstAttribute="leading" secondItem="JdY-3v-2ym" secondAttribute="trailing" constant="10" id="7wK-Nb-Qd7"/>
+                                    <constraint firstItem="kAj-oE-BjX" firstAttribute="bottom" secondItem="JdY-3v-2ym" secondAttribute="bottom" id="Azj-hK-Bnk"/>
+                                    <constraint firstItem="kAj-oE-BjX" firstAttribute="top" secondItem="JdY-3v-2ym" secondAttribute="top" id="K41-73-NqC"/>
+                                    <constraint firstItem="JdY-3v-2ym" firstAttribute="leading" secondItem="kAj-oE-BjX" secondAttribute="trailing" constant="10" id="KDM-lX-cUj"/>
                                     <constraint firstAttribute="trailing" secondItem="0Nz-6I-wXA" secondAttribute="trailing" constant="156" id="LcB-1J-ABM"/>
+                                    <constraint firstItem="JdY-3v-2ym" firstAttribute="top" secondItem="wbL-SM-xuV" secondAttribute="top" id="NyL-oV-4hh"/>
                                     <constraint firstAttribute="trailing" secondItem="AHZ-se-FDP" secondAttribute="trailing" constant="163" id="OLu-L7-ZId"/>
                                     <constraint firstItem="MJA-LH-i9D" firstAttribute="centerX" secondItem="zgV-sf-FpE" secondAttribute="centerX" id="Rdh-1w-3RV"/>
+                                    <constraint firstItem="kAj-oE-BjX" firstAttribute="top" secondItem="MJA-LH-i9D" secondAttribute="bottom" constant="46" id="UjQ-1b-8hN"/>
                                     <constraint firstItem="l2f-Tk-y26" firstAttribute="centerX" secondItem="zgV-sf-FpE" secondAttribute="centerX" id="W9c-sy-8XN"/>
                                     <constraint firstAttribute="bottom" secondItem="MJA-LH-i9D" secondAttribute="bottom" constant="188" id="bd9-9D-BQZ"/>
+                                    <constraint firstItem="izm-1q-EFM" firstAttribute="trailing" secondItem="fm9-eF-dOe" secondAttribute="trailing" id="btu-8W-vpo"/>
                                     <constraint firstItem="0Nz-6I-wXA" firstAttribute="top" secondItem="l2f-Tk-y26" secondAttribute="bottom" constant="34" id="czb-vH-ddv"/>
                                     <constraint firstItem="dN6-hf-SfH" firstAttribute="centerX" secondItem="zgV-sf-FpE" secondAttribute="centerX" id="eV5-d4-Jha"/>
                                     <constraint firstItem="dN6-hf-SfH" firstAttribute="top" secondItem="0Nz-6I-wXA" secondAttribute="bottom" constant="8" symbolic="YES" id="h9y-qv-GaE"/>
+                                    <constraint firstItem="izm-1q-EFM" firstAttribute="leading" secondItem="fm9-eF-dOe" secondAttribute="leading" id="ng8-wZ-GfW"/>
                                     <constraint firstAttribute="trailing" secondItem="fm9-eF-dOe" secondAttribute="trailing" constant="115" id="oIX-58-CMR"/>
                                     <constraint firstItem="AHZ-se-FDP" firstAttribute="centerX" secondItem="zgV-sf-FpE" secondAttribute="centerX" id="rSb-PX-U8v"/>
                                     <constraint firstItem="MJA-LH-i9D" firstAttribute="top" secondItem="dN6-hf-SfH" secondAttribute="bottom" constant="74" id="rgv-JF-dSQ"/>
                                     <constraint firstItem="l2f-Tk-y26" firstAttribute="top" secondItem="AHZ-se-FDP" secondAttribute="bottom" constant="8" symbolic="YES" id="sos-mX-WcR"/>
                                     <constraint firstItem="AHZ-se-FDP" firstAttribute="top" secondItem="fm9-eF-dOe" secondAttribute="bottom" constant="60" id="wJ8-cK-y35"/>
                                     <constraint firstItem="fm9-eF-dOe" firstAttribute="centerX" secondItem="zgV-sf-FpE" secondAttribute="centerX" id="wte-o4-ELW"/>
+                                    <constraint firstItem="izm-1q-EFM" firstAttribute="top" secondItem="fm9-eF-dOe" secondAttribute="top" id="xuc-m6-koE"/>
                                     <constraint firstItem="0Nz-6I-wXA" firstAttribute="centerX" secondItem="zgV-sf-FpE" secondAttribute="centerX" id="xx6-cJ-GQo"/>
+                                    <constraint firstItem="izm-1q-EFM" firstAttribute="bottom" secondItem="fm9-eF-dOe" secondAttribute="bottom" id="zrx-ei-X1D"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -101,9 +140,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="nVF-ZI-4mW"/>
                     <connections>
+                        <outlet property="firstDot" destination="kAj-oE-BjX" id="R4X-Lw-Pig"/>
+                        <outlet property="imageView" destination="fm9-eF-dOe" id="MaX-MP-bev"/>
+                        <outlet property="loginButton" destination="MJA-LH-i9D" id="FGo-e9-e5a"/>
                         <outlet property="loginInput" destination="l2f-Tk-y26" id="Qvi-CP-j1Q"/>
+                        <outlet property="loginLabel" destination="AHZ-se-FDP" id="kEn-fz-tQd"/>
                         <outlet property="passwordInput" destination="dN6-hf-SfH" id="vd0-Wp-Wlr"/>
+                        <outlet property="passwordLabel" destination="0Nz-6I-wXA" id="i8Z-Kk-iY4"/>
                         <outlet property="scrollView" destination="zgV-sf-FpE" id="dXx-4R-aXS"/>
+                        <outlet property="secondDot" destination="JdY-3v-2ym" id="Y6Q-LY-kHp"/>
+                        <outlet property="thirdDot" destination="wbL-SM-xuV" id="Wk4-Ez-EId"/>
+                        <segue destination="TcA-iD-tvC" kind="presentation" identifier="MainSegue" modalPresentationStyle="fullScreen" id="zsy-dA-zff"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -172,6 +219,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99U-8u-dw1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="avatarAnimate:" destination="d3c-Tt-rN4" eventType="touchUpInside" id="mZw-nq-nSU"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
@@ -193,6 +247,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="friendImage" destination="RuV-qd-Pqo" id="9kx-qP-ZhM"/>
+                                    <outlet property="friendImageView" destination="32S-Na-mR1" id="xym-51-WUS"/>
                                     <outlet property="friendName" destination="qUA-di-MJq" id="KDE-Qb-rex"/>
                                     <outlet property="friendStatus" destination="PRk-Kl-xBn" id="Cr5-vP-nRw"/>
                                     <segue destination="Ldy-ig-BhR" kind="show" identifier="ShowUserInfo" id="gxn-nA-LhU"/>
@@ -356,7 +411,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" id="fhM-3H-7b2" customClass="GroupsCell" customModule="VKontakteApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyGroupsCell" id="fhM-3H-7b2" customClass="MyGroupsCell" customModule="VKontakteApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="390" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fhM-3H-7b2" id="Iey-sj-ayc">
@@ -371,6 +426,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KS-V4-QA4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="avatarAnimate:" destination="fhM-3H-7b2" eventType="touchUpInside" id="0sa-xu-7Iw"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
@@ -385,6 +447,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="groupImage" destination="uQn-YF-eBn" id="xSr-D0-Ud2"/>
+                                    <outlet property="groupImageView" destination="NsO-9z-zPW" id="x9E-xq-2wi"/>
                                     <outlet property="groupName" destination="6Vo-kZ-sYF" id="rsc-Fx-9wP"/>
                                     <segue destination="wTO-vZ-vak" kind="show" id="Q5r-GQ-iJl"/>
                                 </connections>
@@ -715,7 +778,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" id="Li9-Jc-lDd" customClass="GroupsCell" customModule="VKontakteApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AllGroupsCell" id="Li9-Jc-lDd" customClass="AllGroupsCell" customModule="VKontakteApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="390" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Li9-Jc-lDd" id="AYy-Dc-Zl0">
@@ -730,6 +793,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4C-Zy-dbj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="avatarAnimate:" destination="Li9-Jc-lDd" eventType="touchUpInside" id="hPW-7o-5Kz"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
@@ -744,6 +814,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="groupImage" destination="u5t-P9-BSv" id="KJy-uq-7ho"/>
+                                    <outlet property="groupImageView" destination="fqL-0i-y8M" id="C7E-Rf-KLm"/>
                                     <outlet property="groupName" destination="0fd-c1-dne" id="TK4-a7-rKh"/>
                                     <segue destination="1gE-De-T6F" kind="unwind" identifier="addGroup" unwindAction="addGroupWithSegue:" id="lbt-dw-TYK"/>
                                 </connections>
