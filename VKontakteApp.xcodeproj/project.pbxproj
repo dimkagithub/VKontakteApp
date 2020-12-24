@@ -29,9 +29,12 @@
 		0A671A732582AF8F00D12B14 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A671A722582AF8F00D12B14 /* Users.swift */; };
 		0A671A762582AF9E00D12B14 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A671A752582AF9E00D12B14 /* Groups.swift */; };
 		0AAD3D8825861A6D00C396CC /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD3D8725861A6D00C396CC /* ButtonExtension.swift */; };
+		0AD20D8525934515009F654D /* ProfileNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8425934515009F654D /* ProfileNewsCell.swift */; };
+		0AD20D8825934541009F654D /* TextNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8725934541009F654D /* TextNewsCell.swift */; };
+		0AD20D8B25934554009F654D /* ImageNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8A25934554009F654D /* ImageNewsCell.swift */; };
+		0AD20D8E25934565009F654D /* ActionsNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8D25934565009F654D /* ActionsNewsCell.swift */; };
 		0ADF7982258E9AC500ABFA00 /* NewsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF7981258E9AC500ABFA00 /* NewsTableController.swift */; };
 		0ADF7985258EA44C00ABFA00 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF7984258EA44C00ABFA00 /* News.swift */; };
-		0AE4624D258E79A5001DF6AE /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE4624C258E79A5001DF6AE /* NewsCell.swift */; };
 		0AEE22662590C55100A3C00D /* GetRandomTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE22652590C55100A3C00D /* GetRandomTime.swift */; };
 		0AF7BD55258BC334000C9F1E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF7BD54258BC334000C9F1E /* ProfileViewController.swift */; };
 		0AFB3CD725822104004BC481 /* MyFriendsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB3CD625822104004BC481 /* MyFriendsTableController.swift */; };
@@ -63,9 +66,12 @@
 		0A671A722582AF8F00D12B14 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		0A671A752582AF9E00D12B14 /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		0AAD3D8725861A6D00C396CC /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		0AD20D8425934515009F654D /* ProfileNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNewsCell.swift; sourceTree = "<group>"; };
+		0AD20D8725934541009F654D /* TextNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNewsCell.swift; sourceTree = "<group>"; };
+		0AD20D8A25934554009F654D /* ImageNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNewsCell.swift; sourceTree = "<group>"; };
+		0AD20D8D25934565009F654D /* ActionsNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsNewsCell.swift; sourceTree = "<group>"; };
 		0ADF7981258E9AC500ABFA00 /* NewsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableController.swift; sourceTree = "<group>"; };
 		0ADF7984258EA44C00ABFA00 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
-		0AE4624C258E79A5001DF6AE /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		0AEE22652590C55100A3C00D /* GetRandomTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRandomTime.swift; sourceTree = "<group>"; };
 		0AF7BD54258BC334000C9F1E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0AFB3CD625822104004BC481 /* MyFriendsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsTableController.swift; sourceTree = "<group>"; };
@@ -176,7 +182,10 @@
 		0AE46244258E7929001DF6AE /* News */ = {
 			isa = PBXGroup;
 			children = (
-				0AE4624C258E79A5001DF6AE /* NewsCell.swift */,
+				0AD20D8425934515009F654D /* ProfileNewsCell.swift */,
+				0AD20D8725934541009F654D /* TextNewsCell.swift */,
+				0AD20D8A25934554009F654D /* ImageNewsCell.swift */,
+				0AD20D8D25934565009F654D /* ActionsNewsCell.swift */,
 				0ADF7981258E9AC500ABFA00 /* NewsTableController.swift */,
 			);
 			path = News;
@@ -266,6 +275,7 @@
 				0ADF7985258EA44C00ABFA00 /* News.swift in Sources */,
 				0A42BE0B25789A9F006FA3A9 /* VKontakteApp.xcdatamodeld in Sources */,
 				0A671A64258293F900D12B14 /* MyGroupsTableController.swift in Sources */,
+				0AD20D8525934515009F654D /* ProfileNewsCell.swift in Sources */,
 				0ADF7982258E9AC500ABFA00 /* NewsTableController.swift in Sources */,
 				0AFB3CDF258224D4004BC481 /* FriendsCell.swift in Sources */,
 				0AFB3CD725822104004BC481 /* MyFriendsTableController.swift in Sources */,
@@ -274,7 +284,6 @@
 				0A5311D0258B53BA0087C1E7 /* Profile.swift in Sources */,
 				0A1ECAAB25853F6E00AE7ED8 /* ImageViewModification.swift in Sources */,
 				0AF7BD55258BC334000C9F1E /* ProfileViewController.swift in Sources */,
-				0AE4624D258E79A5001DF6AE /* NewsCell.swift in Sources */,
 				0A5311C6258B49850087C1E7 /* ProfileCollectionController.swift in Sources */,
 				0A4C2D2C2592035200F76717 /* MyGroupsCell.swift in Sources */,
 				0A671A352582391A00D12B14 /* FriendCell.swift in Sources */,
@@ -284,10 +293,13 @@
 				0A42BE0125789A9F006FA3A9 /* AppDelegate.swift in Sources */,
 				0A489DEA258E3C0B002982EF /* AnimateTables.swift in Sources */,
 				0AAD3D8825861A6D00C396CC /* ButtonExtension.swift in Sources */,
+				0AD20D8B25934554009F654D /* ImageNewsCell.swift in Sources */,
 				0A671A702582991600D12B14 /* AllGroupsTableController.swift in Sources */,
 				0AEE22662590C55100A3C00D /* GetRandomTime.swift in Sources */,
 				0A1554B325920FEB00688F8B /* AvatarAnimate.swift in Sources */,
 				0A42BE0325789A9F006FA3A9 /* SceneDelegate.swift in Sources */,
+				0AD20D8E25934565009F654D /* ActionsNewsCell.swift in Sources */,
+				0AD20D8825934541009F654D /* TextNewsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
