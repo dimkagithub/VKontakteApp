@@ -29,6 +29,7 @@
 		0A671A732582AF8F00D12B14 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A671A722582AF8F00D12B14 /* Users.swift */; };
 		0A671A762582AF9E00D12B14 /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A671A752582AF9E00D12B14 /* Groups.swift */; };
 		0AAD3D8825861A6D00C396CC /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD3D8725861A6D00C396CC /* ButtonExtension.swift */; };
+		0AB6E2DA25A418B100FB5A10 /* ImagesGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6E2D925A418B100FB5A10 /* ImagesGalleryViewController.swift */; };
 		0AD20D8525934515009F654D /* ProfileNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8425934515009F654D /* ProfileNewsCell.swift */; };
 		0AD20D8825934541009F654D /* TextNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8725934541009F654D /* TextNewsCell.swift */; };
 		0AD20D8B25934554009F654D /* ImageNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8A25934554009F654D /* ImageNewsCell.swift */; };
@@ -66,6 +67,7 @@
 		0A671A722582AF8F00D12B14 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		0A671A752582AF9E00D12B14 /* Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		0AAD3D8725861A6D00C396CC /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		0AB6E2D925A418B100FB5A10 /* ImagesGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGalleryViewController.swift; sourceTree = "<group>"; };
 		0AD20D8425934515009F654D /* ProfileNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNewsCell.swift; sourceTree = "<group>"; };
 		0AD20D8725934541009F654D /* TextNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNewsCell.swift; sourceTree = "<group>"; };
 		0AD20D8A25934554009F654D /* ImageNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNewsCell.swift; sourceTree = "<group>"; };
@@ -89,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A35956725A42544004EB623 /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				0A671A342582391A00D12B14 /* FriendCell.swift */,
+				0A671A312582378800D12B14 /* FriendsCollectionController.swift */,
+			);
+			path = Trash;
+			sourceTree = "<group>";
+		};
 		0A42BDF425789A9F006FA3A9 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +134,7 @@
 				0A42BE0E25789AA1006FA3A9 /* LaunchScreen.storyboard */,
 				0A42BE1125789AA1006FA3A9 /* Info.plist */,
 				0A42BE0925789A9F006FA3A9 /* VKontakteApp.xcdatamodeld */,
+				0A35956725A42544004EB623 /* Trash */,
 			);
 			path = VKontakteApp;
 			sourceTree = "<group>";
@@ -140,8 +152,7 @@
 		0A671A2B2582373200D12B14 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				0A671A312582378800D12B14 /* FriendsCollectionController.swift */,
-				0A671A342582391A00D12B14 /* FriendCell.swift */,
+				0AB6E2D925A418B100FB5A10 /* ImagesGalleryViewController.swift */,
 			);
 			path = Friends;
 			sourceTree = "<group>";
@@ -298,6 +309,7 @@
 				0AEE22662590C55100A3C00D /* GetRandomTime.swift in Sources */,
 				0A1554B325920FEB00688F8B /* AvatarAnimate.swift in Sources */,
 				0A42BE0325789A9F006FA3A9 /* SceneDelegate.swift in Sources */,
+				0AB6E2DA25A418B100FB5A10 /* ImagesGalleryViewController.swift in Sources */,
 				0AD20D8E25934565009F654D /* ActionsNewsCell.swift in Sources */,
 				0AD20D8825934541009F654D /* TextNewsCell.swift in Sources */,
 			);

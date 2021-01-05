@@ -9,6 +9,7 @@ import UIKit
 
 class LoginFormController: UIViewController {
     
+    @IBOutlet weak var cloudView: UIView!
     @IBOutlet weak var firstDot: UIView!
     @IBOutlet weak var secondDot: UIView!
     @IBOutlet weak var thirdDot: UIView!
@@ -21,6 +22,7 @@ class LoginFormController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBAction func loginButtonPressed(_ sender: Any) {
         animateDots()
+        animateCloud()
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
             if self.checkUserData() {
                 self.performSegue(withIdentifier: "MainSegue", sender: nil)
@@ -36,6 +38,14 @@ class LoginFormController: UIViewController {
         animation.stiffness = 350.0
         animation.duration = 0.7
         imageView.layer.add(animation, forKey: nil)
+    }
+    @IBAction func cloudButtonAction(_ sender: Any) {
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        animation.fromValue = 0.0
+        animation.toValue = 1.0
+        animation.stiffness = 350.0
+        animation.duration = 0.7
+        cloudView.layer.add(animation, forKey: nil)
     }
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {}
     var count = 0
@@ -56,7 +66,9 @@ class LoginFormController: UIViewController {
         firstDot.backgroundColor = .clear
         secondDot.backgroundColor = .clear
         thirdDot.backgroundColor = .clear
-        animateAppearing()
+        cloudView.backgroundColor = .clear
+        showCloud()
+        animateElements()
     }
     
     // Когда клавиатура появляется
@@ -86,6 +98,7 @@ class LoginFormController: UIViewController {
         firstDot.backgroundColor = .clear
         secondDot.backgroundColor = .clear
         thirdDot.backgroundColor = .clear
+        cloudView.backgroundColor = .clear
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -139,7 +152,7 @@ class LoginFormController: UIViewController {
         present(alter, animated: true, completion: nil)
     }
     
-    func animateAppearing() {
+    func animateElements() {
         self.loginInput.transform = CGAffineTransform(translationX: -self.view.bounds.height / 2, y: 0)
         self.loginLabel.transform = CGAffineTransform(translationX: -self.view.bounds.height / 2, y: 0)
         UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: { self.loginInput.transform = .identity
@@ -154,6 +167,10 @@ class LoginFormController: UIViewController {
         
         loginButton.transform = CGAffineTransform(translationX: 0, y: 300)
         UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.loginButton.transform = .identity
+        }, completion: nil)
+        
+        cloudView.transform = CGAffineTransform(translationX: 0, y: 300)
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.cloudView.transform = .identity
         }, completion: nil)
         
         let animation = CASpringAnimation(keyPath: "transform.scale")
@@ -188,4 +205,69 @@ class LoginFormController: UIViewController {
             }
         }
     }
+    
+    func showCloud() {
+        let cloud = UIView()
+        view.addSubview(cloud)
+        cloudView.translatesAutoresizingMaskIntoConstraints = false
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 5, y: 30))
+        path.addQuadCurve(to: CGPoint(x: 10, y: 20), controlPoint: CGPoint(x: 2.5, y: 25))
+        path.addQuadCurve(to: CGPoint(x: 20, y: 10), controlPoint: CGPoint(x: 10, y: 10))
+        path.addQuadCurve(to: CGPoint(x: 35, y: 10), controlPoint: CGPoint(x: 27.5, y: 0))
+        path.addQuadCurve(to: CGPoint(x: 40, y: 15), controlPoint: CGPoint(x: 40, y: 10))
+        path.addQuadCurve(to: CGPoint(x: 55, y: 30), controlPoint: CGPoint(x: 55, y: 15))
+        path.close()
+        let layerAnimation = CAShapeLayer()
+        layerAnimation.path = path.cgPath
+        layerAnimation.strokeColor = UIColor.white.cgColor
+        layerAnimation.fillColor = UIColor.systemGray4.cgColor
+        layerAnimation.lineWidth = 3
+        layerAnimation.lineCap = .round
+        cloudView.layer.addSublayer(layerAnimation)
+        layerAnimation.strokeEnd = 0
+    }
+    
+    func animateCloud() {
+        let cloud = UIView()
+        view.addSubview(cloud)
+        cloudView.translatesAutoresizingMaskIntoConstraints = false
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 5, y: 30))
+        path.addQuadCurve(to: CGPoint(x: 10, y: 20), controlPoint: CGPoint(x: 2.5, y: 25))
+        path.addQuadCurve(to: CGPoint(x: 20, y: 10), controlPoint: CGPoint(x: 10, y: 10))
+        path.addQuadCurve(to: CGPoint(x: 35, y: 10), controlPoint: CGPoint(x: 27.5, y: 0))
+        path.addQuadCurve(to: CGPoint(x: 40, y: 15), controlPoint: CGPoint(x: 40, y: 10))
+        path.addQuadCurve(to: CGPoint(x: 55, y: 30), controlPoint: CGPoint(x: 55, y: 15))
+        path.close()
+        let layerAnimation = CAShapeLayer()
+        layerAnimation.path = path.cgPath
+        layerAnimation.strokeColor = UIColor.white.cgColor
+        layerAnimation.fillColor = UIColor.systemGray4.cgColor
+        layerAnimation.lineWidth = 3
+        layerAnimation.lineCap = .round
+        cloudView.layer.addSublayer(layerAnimation)
+        layerAnimation.strokeEnd = 0
+        let pathAnimationEnd = CABasicAnimation(keyPath: "strokeEnd")
+        pathAnimationEnd.fromValue = 0
+        pathAnimationEnd.toValue = 1
+        pathAnimationEnd.duration = 2
+        pathAnimationEnd.fillMode = .both
+        pathAnimationEnd.isRemovedOnCompletion = false
+        layerAnimation.add(pathAnimationEnd, forKey: nil)
+        let pathAnimationStart = CABasicAnimation(keyPath: "strokeStart")
+        pathAnimationStart.fromValue = 0
+        pathAnimationStart.toValue = 1
+        pathAnimationStart.duration = 2
+        pathAnimationStart.fillMode = .both
+        pathAnimationStart.isRemovedOnCompletion = false
+        pathAnimationStart.beginTime = 1
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = 3
+        animationGroup.fillMode = CAMediaTimingFillMode.backwards
+        animationGroup.animations = [pathAnimationEnd, pathAnimationStart]
+        animationGroup.repeatCount = .infinity
+        layerAnimation.add(animationGroup, forKey: nil)
+    }
+    
 }

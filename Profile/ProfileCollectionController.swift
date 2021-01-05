@@ -11,8 +11,6 @@ class ProfileCollectionController: UICollectionViewController {
     
     let profile = ProfileClass.makeProfile()
     
-    let disneyImages = ["p1","p2","p3","p4","p5","p6","p7","p8","p9","p10",]
-    
     let itemPerRow: CGFloat = 1.0
     let sectionInserts = UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
 
@@ -35,20 +33,16 @@ class ProfileCollectionController: UICollectionViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return disneyImages.count
+        return profile[section].profileImages.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCell", for: indexPath) as! ProfileCell
-        let imageName = disneyImages[indexPath.item]
-        let image = UIImage(named: imageName)
-        cell.profileImage.image = image
+        cell.profileImage.image = profile[indexPath.section].profileImages[indexPath.row]
         return cell
     }
 
