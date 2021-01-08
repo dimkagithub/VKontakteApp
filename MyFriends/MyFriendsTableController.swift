@@ -88,7 +88,7 @@ class MyFriendsTableController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowUserInfo" {
-            let controller = segue.destination as! FriendsCollectionController
+            let controller = segue.destination as! ImagesGalleryViewController
             if let index = tableView.indexPathForSelectedRow {
                 var friends: Users
                 if filtering {
