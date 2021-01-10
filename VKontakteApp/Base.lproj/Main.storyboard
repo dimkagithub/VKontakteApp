@@ -204,7 +204,7 @@
         <!--Друзья-->
         <scene sceneID="UwE-9t-jHz">
             <objects>
-                <navigationController id="3KU-vh-v6l" sceneMemberID="viewController">
+                <navigationController id="3KU-vh-v6l" customClass="CustomNavigationController" customModule="VKontakteApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" image="person.3.fill" catalog="system" id="DNW-i9-wwt"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cgm-CU-w1X">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
@@ -339,7 +339,7 @@
         <!--Группы-->
         <scene sceneID="roK-hW-6U1">
             <objects>
-                <navigationController id="mi0-aW-goE" sceneMemberID="viewController">
+                <navigationController id="mi0-aW-goE" customClass="CustomNavigationController" customModule="VKontakteApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Группы" image="circle.grid.2x2.fill" catalog="system" id="bwB-XN-iyE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ltK-ku-pts">
                         <rect key="frame" x="0.0" y="44" width="390" height="44"/>
@@ -882,7 +882,7 @@
         <!--Профиль-->
         <scene sceneID="Hmo-4H-Kcu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sbO-ba-cnj" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sbO-ba-cnj" customClass="CustomNavigationController" customModule="VKontakteApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Профиль" image="person.fill" catalog="system" id="TFU-SX-zlI"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -902,7 +902,7 @@
         <!--Новости-->
         <scene sceneID="QQU-aI-fuY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qMv-3K-RNc" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qMv-3K-RNc" customClass="CustomNavigationController" customModule="VKontakteApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Новости" image="newspaper.fill" catalog="system" id="p7l-bG-8yk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SPb-vo-wvv">
