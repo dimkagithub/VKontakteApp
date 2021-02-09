@@ -44,6 +44,7 @@
 		0AF7BD55258BC334000C9F1E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF7BD54258BC334000C9F1E /* ProfileViewController.swift */; };
 		0AFB3CD725822104004BC481 /* MyFriendsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB3CD625822104004BC481 /* MyFriendsTableController.swift */; };
 		0AFB3CDF258224D4004BC481 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB3CDE258224D4004BC481 /* FriendsCell.swift */; };
+		0AFED89F25D2C95900807602 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFED89E25D2C95900807602 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		0AF7BD54258BC334000C9F1E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0AFB3CD625822104004BC481 /* MyFriendsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsTableController.swift; sourceTree = "<group>"; };
 		0AFB3CDE258224D4004BC481 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
+		0AFED89E25D2C95900807602 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		0A42BDF425789A9F006FA3A9 = {
 			isa = PBXGroup;
 			children = (
+				0AFED89D25D2C92D00807602 /* Networking */,
 				0AE46244258E7929001DF6AE /* News */,
 				0A671A2B2582373200D12B14 /* Friends */,
 				0AFB3CD525821FE1004BC481 /* MyFriends */,
@@ -181,6 +184,7 @@
 		0A671A372582591300D12B14 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A1ECAAA25853F6E00AE7ED8 /* ImageViewModification.swift */,
 				0A671A722582AF8F00D12B14 /* Users.swift */,
 				0A5311CF258B53BA0087C1E7 /* Profile.swift */,
 				0A671A752582AF9E00D12B14 /* Groups.swift */,
@@ -226,10 +230,17 @@
 			isa = PBXGroup;
 			children = (
 				0AFB3CD625822104004BC481 /* MyFriendsTableController.swift */,
-				0A1ECAAA25853F6E00AE7ED8 /* ImageViewModification.swift */,
 				0AFB3CDE258224D4004BC481 /* FriendsCell.swift */,
 			);
 			path = MyFriends;
+			sourceTree = "<group>";
+		};
+		0AFED89D25D2C92D00807602 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0AFED89E25D2C95900807602 /* NetworkManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 				0AF7BD55258BC334000C9F1E /* ProfileViewController.swift in Sources */,
 				0A5311C6258B49850087C1E7 /* ProfileCollectionController.swift in Sources */,
 				0A4C2D2C2592035200F76717 /* MyGroupsCell.swift in Sources */,
+				0AFED89F25D2C95900807602 /* NetworkManager.swift in Sources */,
 				0A671A352582391A00D12B14 /* FriendCell.swift in Sources */,
 				0A671A6C2582943900D12B14 /* AllGroupsCell.swift in Sources */,
 				0A69CBD925A88C64009977B3 /* CustomNavigationController.swift in Sources */,
