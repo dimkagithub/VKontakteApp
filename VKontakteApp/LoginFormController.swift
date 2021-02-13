@@ -20,6 +20,7 @@ class LoginFormController: UIViewController {
     @IBOutlet weak var loginInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var vkLogin: UIButton!
     @IBAction func loginButtonPressed(_ sender: Any) {
         animateDots()
         animateCloud()
@@ -110,19 +111,19 @@ class LoginFormController: UIViewController {
     @objc func hideKeyboard() {
         self.scrollView?.endEditing(true)
     }
-
-//    Если необходимо убрать задержку индикатора загрузки, нужно удалить Segue и протянуть связь с кнопки.
-//
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        // Проверяем данные
-//        let checkResult = checkUserData()
-//        // Если данные не верны, покажем ошибку
-//        if !checkResult {
-//            showLoginError()
-//        }
-//        // Вернем результат
-//        return checkResult
-//    }
+    
+    //    Если необходимо убрать задержку индикатора загрузки, нужно удалить Segue и протянуть связь с кнопки.
+    //
+    //    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    //        // Проверяем данные
+    //        let checkResult = checkUserData()
+    //        // Если данные не верны, покажем ошибку
+    //        if !checkResult {
+    //            showLoginError()
+    //        }
+    //        // Вернем результат
+    //        return checkResult
+    //    }
     
     func checkUserData() -> Bool {
         loginInput.text = "admin"
@@ -167,6 +168,10 @@ class LoginFormController: UIViewController {
         
         loginButton.transform = CGAffineTransform(translationX: 0, y: 300)
         UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.loginButton.transform = .identity
+        }, completion: nil)
+        
+        vkLogin.transform = CGAffineTransform(translationX: 0, y: 300)
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.vkLogin.transform = .identity
         }, completion: nil)
         
         cloudView.transform = CGAffineTransform(translationX: 0, y: 300)
