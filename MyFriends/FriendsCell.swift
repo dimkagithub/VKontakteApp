@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FriendsCell: UITableViewCell {
     
@@ -16,4 +17,12 @@ class FriendsCell: UITableViewCell {
     @IBAction func avatarAnimate(_ sender: UIButton) {
         sender.animateAvatar(avatarAnimation: friendImageView)
     }
+    
+    func configure(with user: Friend) {
+        self.friendName.text = "\(user.firstName) \(user.lastName)"
+        self.friendStatus.textColor = .lightGray
+        let url = URL(string: user.avatarURL)
+        self.friendImage.kf.setImage(with: url)
+    }
+    
 }

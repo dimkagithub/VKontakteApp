@@ -6,23 +6,42 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MyFriendsTableController: UITableViewController {
     
-    let myFriends = Friends.makeFriends().sorted{ $0.userName < $1.userName }
-    var filteredFriends = [Users]()
+    var myFriends = [Friend]()
+    var filteredFriends = [Friend]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
     var filtering: Bool {
         return searchController.isActive && !searchBarIsEmpty
+        
     }
     let searchController = UISearchController(searchResultsController: nil)
-    var friendSections = [MyFriendsSections]()
+    var friendSections = [MyVKFriendsSections]()
+    let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        networkManager.getFriends(onComplete: { [weak self] myFriends in
+            self?.myFriends = myFriends
+            
+            let friendsDictionary = Dictionary.init(grouping: myFriends) {
+                $0.lastName.prefix(1)
+            }
+            self?.friendSections = friendsDictionary.map { MyVKFriendsSections(title: String($0.key), items: $0.value) }
+            self?.friendSections.sort { $0.title < $1.title }
+            
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }) { (error) in
+            print(error)
+        }
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск..."
@@ -30,11 +49,7 @@ class MyFriendsTableController: UITableViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        let friendsDictionary = Dictionary.init(grouping: myFriends) {
-            $0.userName.prefix(1)
-        }
-        friendSections = friendsDictionary.map { MyFriendsSections(title: String($0.key), items: $0.value) }
-        friendSections.sort { $0.title < $1.title }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,14 +78,13 @@ class MyFriendsTableController: UITableViewController {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsCell
         else { return UITableViewCell() }
-        var friends: Users
+        var friends: Friend
         if filtering {
             friends = filteredFriends[indexPath.row]
         } else {
             friends = friendSections[indexPath.section].items[indexPath.row]
         }
-        cell.friendImage.image = friends.userAvatar
-        cell.friendName.text = friends.userName
+        cell.configure(with: friends)
         cell.friendStatus.textColor = status == .online ? .black : .lightGray
         cell.friendStatus.text = status.rawValue
         return cell
@@ -90,14 +104,14 @@ class MyFriendsTableController: UITableViewController {
         if segue.identifier == "ShowUserInfo" {
             let controller = segue.destination as! ImagesGalleryViewController
             if let index = tableView.indexPathForSelectedRow {
-                var friends: Users
+                var friends: Friend
                 if filtering {
                     friends = filteredFriends[index.row]
                 } else {
                     friends = friendSections[index.section].items[index.row]
                 }
-                controller.images = friends.userImages
-                controller.title = friends.userName
+//                controller.images = friends.userImages
+                controller.title = friends.lastName
             }
         }
     }
@@ -112,8 +126,8 @@ extension MyFriendsTableController: UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
         }
     func filterContentForSearchText(_ searchText: String) {
-        filteredFriends = myFriends.filter({ (myFriends: Users) -> Bool in
-            return myFriends.userName.lowercased().contains(searchText.lowercased())
+        filteredFriends = myFriends.filter({ (myFriends: Friend) -> Bool in
+            return myFriends.lastName.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
