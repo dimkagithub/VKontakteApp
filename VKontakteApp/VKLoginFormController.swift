@@ -10,6 +10,8 @@ import WebKit
 
 class VKLoginFormController: UIViewController {
     
+    let netConstants = NetworkConstants()
+    
     @IBOutlet weak var webView: WKWebView! {
         didSet {
             webView.navigationDelegate = self
@@ -26,12 +28,12 @@ class VKLoginFormController: UIViewController {
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "7759985"),
-            URLQueryItem(name: "display", value: "mobile"),
-            URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "262150"),
-            URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.130")
+            URLQueryItem(name: "client_id", value: netConstants.clientID),
+            URLQueryItem(name: "display", value: netConstants.display),
+            URLQueryItem(name: "redirect_uri", value: netConstants.redirectURI),
+            URLQueryItem(name: "scope", value: netConstants.scope),
+            URLQueryItem(name: "response_type", value: netConstants.responseType),
+            URLQueryItem(name: "v", value: netConstants.APIversion)
         ]
         
         let request = URLRequest(url: urlComponents.url!)
@@ -72,10 +74,6 @@ extension VKLoginFormController: WKNavigationDelegate {
         }
         
         Session.shared.token = token
-        NetworkManager.loadGroups(token: token)
-        NetworkManager.loadFriends(token: token)
-        NetworkManager.loadFriendsPhotos(token: token)
-        NetworkManager.groupSearch(token: token, query: "Apple")
         
         decisionHandler(.cancel)
         performSegue(withIdentifier: "TabBarSegue", sender: nil)
