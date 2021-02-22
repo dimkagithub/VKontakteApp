@@ -41,5 +41,4 @@ final class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition( isComplete && !transitionContext.transitionWasCancelled)
         }
     }
-    
 }

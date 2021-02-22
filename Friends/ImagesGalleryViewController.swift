@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ImagesGalleryViewController: UIViewController {
     
+    let networkManager = NetworkManager()
     var images = [UIImage?]()
     var selectedPhoto = 0
     var leftImageView: UIImageView!
@@ -16,6 +18,9 @@ class ImagesGalleryViewController: UIViewController {
     var rightImageView: UIImageView!
     var swipeToRight: UIViewPropertyAnimator!
     var swipeToLeft: UIViewPropertyAnimator!
+    var friend: Friend!
+    var userImages = [String]()
+    var tempImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +31,23 @@ class ImagesGalleryViewController: UIViewController {
         super.viewWillAppear(animated)
         let gestPan = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
         view.addGestureRecognizer(gestPan)
-        setImage()
-        startAnimate()
+        
+        networkManager.getPhoto(for: friend.id) { [weak self] (photos) in
+            self?.userImages = photos.compactMap { $0.sizes[$0.sizes.count - 1].url }
+            if let userImages = self?.userImages {
+                self?.getDataFromURLs(urls: userImages, completion: { (image) in
+                    self?.images.append(image)
+                    DispatchQueue.main.async {
+                        self?.setImage()
+                        self?.startAnimate()
+                    }
+                })
+            }
+        } onError: { (error) in
+            print(error.localizedDescription)
+        }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.subviews.forEach({ $0.removeFromSuperview() })
@@ -49,7 +68,7 @@ class ImagesGalleryViewController: UIViewController {
         leftImageView = UIImageView()
         middleImageView = UIImageView()
         rightImageView = UIImageView()
-
+        
         leftImageView.contentMode = .scaleAspectFill
         middleImageView.contentMode = .scaleAspectFill
         rightImageView.contentMode = .scaleAspectFill
@@ -175,4 +194,14 @@ class ImagesGalleryViewController: UIViewController {
         }
     }
     
+    private func getDataFromURLs(urls: [String], completion: @escaping (UIImage?) -> ()) {
+        urls.forEach { (urlString) in
+            DispatchQueue.main.async {
+                self.tempImage = UIImageView()
+                self.tempImage.getData(from: URL(string: urlString)!) { (data) in
+                    completion(UIImage(data: data))
+                }
+            }
+        }
+    }
 }

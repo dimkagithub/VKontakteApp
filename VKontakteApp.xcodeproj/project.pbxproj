@@ -57,6 +57,7 @@
 		0AF7BD55258BC334000C9F1E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF7BD54258BC334000C9F1E /* ProfileViewController.swift */; };
 		0AFB3CD725822104004BC481 /* MyFriendsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB3CD625822104004BC481 /* MyFriendsTableController.swift */; };
 		0AFB3CDF258224D4004BC481 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB3CDE258224D4004BC481 /* FriendsCell.swift */; };
+		0AFB59F325E3B1E3007EF840 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB59F225E3B1E3007EF840 /* ImageView.swift */; };
 		0AFED89F25D2C95900807602 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFED89E25D2C95900807602 /* NetworkManager.swift */; };
 		1E0C3F750DABCE7E0D651D35 /* Pods_VKontakteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AA6D1EA0633BD3C7EE0EEB /* Pods_VKontakteApp.framework */; };
 /* End PBXBuildFile section */
@@ -116,6 +117,7 @@
 		0AF7BD54258BC334000C9F1E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0AFB3CD625822104004BC481 /* MyFriendsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsTableController.swift; sourceTree = "<group>"; };
 		0AFB3CDE258224D4004BC481 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
+		0AFB59F225E3B1E3007EF840 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		0AFED89E25D2C95900807602 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0B699826627F79F42F143ABD /* Pods-VKontakteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKontakteApp.release.xcconfig"; path = "Target Support Files/Pods-VKontakteApp/Pods-VKontakteApp.release.xcconfig"; sourceTree = "<group>"; };
 		5F8CAB85E880C79C56BEB137 /* Pods-VKontakteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKontakteApp.debug.xcconfig"; path = "Target Support Files/Pods-VKontakteApp/Pods-VKontakteApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		0A42BDF425789A9F006FA3A9 = {
 			isa = PBXGroup;
 			children = (
+				0AFB59F125E3B18E007EF840 /* Extensions */,
 				0A90A77625DFA59500676D9F /* VKModel */,
 				0AFED89D25D2C92D00807602 /* Networking */,
 				0AE46244258E7929001DF6AE /* News */,
@@ -294,6 +297,14 @@
 				0AFB3CDE258224D4004BC481 /* FriendsCell.swift */,
 			);
 			path = MyFriends;
+			sourceTree = "<group>";
+		};
+		0AFB59F125E3B18E007EF840 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0AFB59F225E3B1E3007EF840 /* ImageView.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0AFED89D25D2C92D00807602 /* Networking */ = {
@@ -455,6 +466,7 @@
 				0A4C2D2C2592035200F76717 /* MyGroupsCell.swift in Sources */,
 				0A90A78425DFA6DD00676D9F /* ServerError.swift in Sources */,
 				0AFED89F25D2C95900807602 /* NetworkManager.swift in Sources */,
+				0AFB59F325E3B1E3007EF840 /* ImageView.swift in Sources */,
 				0A671A352582391A00D12B14 /* FriendCell.swift in Sources */,
 				0A671A6C2582943900D12B14 /* AllGroupsCell.swift in Sources */,
 				0A69CBD925A88C64009977B3 /* CustomNavigationController.swift in Sources */,

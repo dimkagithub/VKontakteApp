@@ -19,7 +19,7 @@ class InteractiveManager: UIPercentDrivenInteractiveTransition {
     }
     
     @objc func handleGesture(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
-    
+        
         switch gestureRecognizer.state {
         case .began:
             hasStarted = true
@@ -40,5 +40,4 @@ class InteractiveManager: UIPercentDrivenInteractiveTransition {
             break
         }
     }
-    
 }

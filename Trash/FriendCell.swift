@@ -8,14 +8,14 @@
 //import UIKit
 //
 //class FriendCell: UICollectionViewCell {
-//    
+//
 //    @IBAction func pulseButton(_ sender: UIButton) {
 //        sender.pulsate()
 //    }
 //    @IBOutlet weak var userImage: UIImageView!
 //    @IBOutlet weak var likeCounter: UILabel!
 //    @IBOutlet weak var likeButton: UIButton!
-//    
+//
 //    override func awakeFromNib() {
 //        super.awakeFromNib()
 ////        layer.borderColor = UIColor.lightGray.cgColor
@@ -26,11 +26,10 @@
 //        likeCounter.textColor = likeButton.isSelected ? .red : .systemBlue
 //        likeCounter.text = "0"
 //    }
-//    
+//
 //    @IBAction func like() {
 //        likeButton.isSelected.toggle()
 //        likeCounter.textColor = likeButton.isSelected ? .red : .systemBlue
 //        likeCounter.text = likeButton.isSelected ? "1" : "0"
 //    }
-//    
 //}

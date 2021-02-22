@@ -20,7 +20,6 @@ class LoginFormController: UIViewController {
     @IBOutlet weak var loginInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var vkLogin: UIButton!
     @IBAction func loginButtonPressed(_ sender: Any) {
         animateDots()
         animateCloud()
@@ -32,6 +31,7 @@ class LoginFormController: UIViewController {
             }
         }
     }
+    
     @IBAction func logoButtonAction(_ sender: Any) {
         let animation = CASpringAnimation(keyPath: "transform.scale")
         animation.fromValue = 0.0
@@ -40,6 +40,7 @@ class LoginFormController: UIViewController {
         animation.duration = 0.7
         imageView.layer.add(animation, forKey: nil)
     }
+    
     @IBAction func cloudButtonAction(_ sender: Any) {
         let animation = CASpringAnimation(keyPath: "transform.scale")
         animation.fromValue = 0.0
@@ -48,6 +49,7 @@ class LoginFormController: UIViewController {
         animation.duration = 0.7
         cloudView.layer.add(animation, forKey: nil)
     }
+    
     @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {}
     var count = 0
     
@@ -112,18 +114,18 @@ class LoginFormController: UIViewController {
         self.scrollView?.endEditing(true)
     }
     
-    //    Если необходимо убрать задержку индикатора загрузки, нужно удалить Segue и протянуть связь с кнопки.
-    //
-    //    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    //        // Проверяем данные
-    //        let checkResult = checkUserData()
-    //        // Если данные не верны, покажем ошибку
-    //        if !checkResult {
-    //            showLoginError()
-    //        }
-    //        // Вернем результат
-    //        return checkResult
-    //    }
+//    Если необходимо убрать задержку индикатора загрузки, нужно удалить Segue и протянуть связь с кнопки.
+//
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        // Проверяем данные
+//        let checkResult = checkUserData()
+//        // Если данные не верны, покажем ошибку
+//        if !checkResult {
+//            showLoginError()
+//        }
+//        // Вернем результат
+//        return checkResult
+//    }
     
     func checkUserData() -> Bool {
         loginInput.text = "admin"
@@ -170,9 +172,6 @@ class LoginFormController: UIViewController {
         UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.loginButton.transform = .identity
         }, completion: nil)
         
-        vkLogin.transform = CGAffineTransform(translationX: 0, y: 300)
-        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.vkLogin.transform = .identity
-        }, completion: nil)
         
         cloudView.transform = CGAffineTransform(translationX: 0, y: 300)
         UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { self.cloudView.transform = .identity
@@ -274,5 +273,4 @@ class LoginFormController: UIViewController {
         animationGroup.repeatCount = .infinity
         layerAnimation.add(animationGroup, forKey: nil)
     }
-    
 }

@@ -8,11 +8,17 @@
 import UIKit
 
 class MyGroupsCell: UITableViewCell {
-
+    
     @IBOutlet weak var groupImage: UIImageView!
     @IBOutlet weak var groupName: UILabel!
     @IBOutlet weak var groupImageView: SetImageShadow!
     @IBAction func avatarAnimate(_ sender: UIButton) {
         sender.animateAvatar(avatarAnimation: groupImageView)
+    }
+    
+    func configure(with group: Community) {
+        self.groupName.text = group.name
+        let url = URL(string: group.avatarURL)
+        self.groupImage.kf.setImage(with: url)
     }
 }

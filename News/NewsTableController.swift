@@ -23,7 +23,7 @@ class NewsTableController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
-        
+    
     let numberOfRows = 4
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch numberOfRows {
@@ -93,10 +93,7 @@ class NewsTableController: UITableViewController {
         }
         return UITableViewCell()
     }
-    
 }
-    
- 
  
 /*
  let nubmerOfRows = news[indexPath.section].numberOfRows

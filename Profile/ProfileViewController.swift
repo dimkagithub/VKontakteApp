@@ -10,7 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     var image: UIImage?
-
+    
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
@@ -24,5 +24,4 @@ class ProfileViewController: UIViewController {
         }
         present(shareController, animated: true, completion: nil)
     }
-    
 }

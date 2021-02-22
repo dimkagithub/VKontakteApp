@@ -22,7 +22,7 @@ class NetworkManager {
         session = URLSession(configuration: configuration)
     }
     
-    func  getAuthorizeRequest() -> URLRequest? {
+    func getAuthorizeRequest() -> URLRequest? {
         urlConstructor.host = "oauth.vk.com"
         urlConstructor.path = "/authorize"
         
@@ -40,14 +40,10 @@ class NetworkManager {
         return request
     }
     
-    //MARK: - Photo
     func getPhoto(for ownerID: Int?, onComplete: @escaping ([Photo]) -> Void, onError: @escaping (Error) -> Void) {
-        
-        
         urlConstructor.path = "/method/photos.getAll"
         
         guard let owner = ownerID else { return }
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "owner_id", value: String(owner)),
             URLQueryItem(name: "photo_sizes", value: "1"),
@@ -73,12 +69,10 @@ class NetworkManager {
             onComplete(photos)
         }
         task.resume()
-        
     }
-    //MARK: - News feed
+    
     func getNews(onComplete: @escaping ([NewsModel]) -> Void, onError: @escaping (Error) -> Void) {
         urlConstructor.path = "/method/newsfeed.get"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "filters", value: "post"),
             URLQueryItem(name: "start_from", value: "next_from"),
@@ -103,13 +97,10 @@ class NetworkManager {
             onComplete(news)
         }
         task.resume()
-        
     }
     
-    //MARK: - Community User
     func getCommunity(onComplete: @escaping ([Community]) -> Void, onError: @escaping (Error) -> Void) {
         urlConstructor.path = "/method/groups.get"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "extended", value: "1"),
             URLQueryItem(name: "fields", value: "description"),
@@ -134,9 +125,9 @@ class NetworkManager {
         }
         task.resume()
     }
+    
     func getSearchCommunity(text: String, onComplete: @escaping ([Community]) -> Void, onError: @escaping (Error) -> Void) {
         urlConstructor.path = "/method/groups.search"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "q", value: text),
             URLQueryItem(name: "access_token", value: Session.shared.token),
@@ -161,14 +152,11 @@ class NetworkManager {
         task.resume()
     }
     
-    
-    //MARK: - Friends User
     func getFriends(onComplete: @escaping ([Friend]) -> Void, onError: @escaping (Error) -> Void) {
         urlConstructor.path = "/method/friends.get"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "order", value: "name"),
-            URLQueryItem(name: "fields", value: "sex, bdate, city, country, photo_100, photo_200_orig"),
+            URLQueryItem(name: "fields", value: "online, status, sex, bdate, city, country, photo_100, photo_200_orig"),
             URLQueryItem(name: "access_token", value: Session.shared.token),
             URLQueryItem(name: "v", value: constants.APIversion),
         ]
@@ -189,15 +177,13 @@ class NetworkManager {
             onComplete(friends)
         }
         task.resume()
-        
     }
     
     func getOnlineFriends(onComplete: @escaping ([Friend]) -> Void, onError: @escaping (Error) -> Void) {
         urlConstructor.path = "/method/friends.getOnline"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "order", value: "name"),
-            URLQueryItem(name: "fields", value: "sex, bdate, city, country, photo_100, photo_200_orig"),
+            URLQueryItem(name: "fields", value: "online, status, sex, bdate, city, country, photo_100, photo_200_orig"),
             URLQueryItem(name: "access_token", value: Session.shared.token),
             URLQueryItem(name: "v", value: constants.APIversion),
         ]
@@ -218,14 +204,10 @@ class NetworkManager {
             onComplete(friends)
         }
         task.resume()
-        
     }
     
-    //MARK: -  Files User
     func getFiles( onComplete: @escaping ([FileModel]) -> Void, onError: @escaping (Error) -> Void){
-        
         urlConstructor.path = "/method/docs.get"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "count", value: "0"),
             URLQueryItem(name: "type", value: "0"),
@@ -254,9 +236,7 @@ class NetworkManager {
     }
     
     func editFile(id: Int, newName name: String, onComplete: @escaping () -> Void, onError: @escaping (Error) -> Void){
-        
         urlConstructor.path = "/method/docs.edit"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "doc_id", value: "\(id)"),
             URLQueryItem(name: "title", value: "\(name)"),
@@ -277,9 +257,7 @@ class NetworkManager {
     }
     
     func deleteFile(file: FileModel, onComplete: @escaping () -> Void, onError: @escaping (Error) -> Void){
-        
         urlConstructor.path = "/method/docs.delete"
-        
         urlConstructor.queryItems = [
             URLQueryItem(name: "owner_id", value: "\(file.ownerID)"),
             URLQueryItem(name: "doc_id", value: "\(file.id)"),
@@ -298,13 +276,21 @@ class NetworkManager {
         }
         task.resume()
     }
+    
+    func loadImageFromURL(url: URL) -> UIImage? {
+        if let data = try? Data(contentsOf: url) {
+            if let image = UIImage(data: data) {
+                return image
+            }
+        }
+        return nil
+    }
+    
     // Стоит вынести в отдельный класс?
     func downloadFile(_ file: FileModel, isUserInitiated: Bool, completion: @escaping (_ success: Bool,_ filrLocation: URL?) -> Void){
         
         let fileURL = URL(string: file.url)
-        
         let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
         let destinationURL = documentDirectoryURL.appendingPathComponent("\(file.id)" + "." + "\(file.ext)" )
         
         if FileManager.default.fileExists(atPath: destinationURL.path){
