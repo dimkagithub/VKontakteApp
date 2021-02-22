@@ -8,17 +8,14 @@
 import UIKit
 
 class ImageNewsCell: UITableViewCell {
-
+    
     @IBOutlet weak var imageNews: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
-
 }

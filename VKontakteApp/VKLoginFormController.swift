@@ -18,8 +18,6 @@ class VKLoginFormController: UIViewController {
         }
     }
     
-    @IBAction func myUnwindAction(unwindSegue: UIStoryboardSegue) {}
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +37,6 @@ class VKLoginFormController: UIViewController {
         let request = URLRequest(url: urlComponents.url!)
         
         webView.load(request)
-        
     }
 }
 
@@ -63,7 +60,6 @@ extension VKLoginFormController: WKNavigationDelegate {
                 
                 return dict
             }
-        
         print(params)
         
         guard let token = params["access_token"],
@@ -74,9 +70,7 @@ extension VKLoginFormController: WKNavigationDelegate {
         }
         
         Session.shared.token = token
-        
         decisionHandler(.cancel)
         performSegue(withIdentifier: "TabBarSegue", sender: nil)
     }
-    
 }

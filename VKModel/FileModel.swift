@@ -30,7 +30,7 @@ class FileModel: Codable {
         case url
     }
 }
-// MARK: - TypeFile
+
 enum TypeFile: Int, Codable {
     case textDocument = 1
     case archiv = 2
@@ -42,8 +42,8 @@ enum TypeFile: Int, Codable {
     case unknown = 8
     
 }
+
 extension TypeFile {
-    
     func getName() -> String {
         switch self {
         case .textDocument :
@@ -64,6 +64,7 @@ extension TypeFile {
             return "Unknown"       //— неизвестно.
         }
     }
+    
     func  getIconName() -> String {
         switch self {
         case .textDocument :

@@ -8,7 +8,7 @@
 import Foundation
 
 struct NetworkConstants {
-    let clientID = "7766801"
+    let clientID = "7769980"
     let display = "mobile"
     let redirectURI = "https://oauth.vk.com/blank.html"
     let scope = "262150"

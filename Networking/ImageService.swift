@@ -76,7 +76,6 @@ class ImageService {
             }
             
         }.resume()
-        
     }
     
     func photo(atIndexpath indexPath: IndexPath, byUrl url: String) -> UIImage? {
@@ -118,7 +117,6 @@ extension ImageService {
         func reloadRow(atIndexpath indexPath: IndexPath) {
             table.reloadRows(at: [indexPath], with: .none)
         }
-        
     }
     
     private class Collection: DataReloadable {

@@ -14,5 +14,4 @@ class Session {
     
     private init() {
     }
-    
 }

@@ -9,7 +9,6 @@ import Foundation
 
 class Response<T: Codable>: Codable {
     let response: Items<T>
-    
 }
 
 class Items<T: Codable>: Codable {

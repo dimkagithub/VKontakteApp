@@ -10,7 +10,6 @@ import UIKit
 struct News {
     let newsText: String?
     let newsImage: UIImage?
-    
 }
 
 final class NewsClass {

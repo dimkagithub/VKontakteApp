@@ -26,8 +26,8 @@ class MyFriendsTableController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        networkManager.getFriends(onComplete: { [weak self] myFriends in
+        
+        networkManager.getFriends(onComplete: { [weak self] (myFriends) in
             self?.myFriends = myFriends
             
             let friendsDictionary = Dictionary.init(grouping: myFriends) {
@@ -48,8 +48,6 @@ class MyFriendsTableController: UITableViewController {
         searchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +72,6 @@ class MyFriendsTableController: UITableViewController {
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? { friendSections.map { $0.title } }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let status = UserStatus.setRandomStatus()
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsCell
         else { return UITableViewCell() }
@@ -85,21 +82,19 @@ class MyFriendsTableController: UITableViewController {
             friends = friendSections[indexPath.section].items[indexPath.row]
         }
         cell.configure(with: friends)
-        cell.friendStatus.textColor = status == .online ? .black : .lightGray
-        cell.friendStatus.text = status.rawValue
         return cell
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10.0))
         view.backgroundColor = .systemGray5
-        let label = UILabel(frame: CGRect(x: 45, y: 5, width: tableView.frame.width - 10, height: 20.0))
+        let label = UILabel(frame: CGRect(x: 42, y: 5, width: tableView.frame.width - 10, height: 20.0))
         label.font = UIFont(name: "Avenir Next Medium", size: 17.0)
         label.text = friendSections[section].title
         view.addSubview(label)
         return view
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowUserInfo" {
             let controller = segue.destination as! ImagesGalleryViewController
@@ -110,8 +105,8 @@ class MyFriendsTableController: UITableViewController {
                 } else {
                     friends = friendSections[index.section].items[index.row]
                 }
-//                controller.images = friends.userImages
-                controller.title = friends.lastName
+                controller.friend = friends
+                controller.title = ("\(friends.lastName) \(friends.firstName)")
             }
         }
     }
@@ -124,7 +119,7 @@ class MyFriendsTableController: UITableViewController {
 extension MyFriendsTableController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
-        }
+    }
     func filterContentForSearchText(_ searchText: String) {
         filteredFriends = myFriends.filter({ (myFriends: Friend) -> Bool in
             return myFriends.lastName.lowercased().contains(searchText.lowercased())

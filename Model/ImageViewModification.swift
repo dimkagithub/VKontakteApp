@@ -27,5 +27,4 @@ class SetImageShadow: UIImageView {
         layer.cornerRadius = bounds.height / 2
         clipsToBounds = false
     }
-    
 }
