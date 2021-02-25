@@ -17,8 +17,8 @@ class AllGroupsCell: UITableViewCell {
     }
     
     func configure(with group: Community) {
-        self.groupName.text = group.name
-        let url = URL(string: group.avatarURL)
+        self.groupName.text = group.groupName
+        let url = URL(string: group.groupImage)
         self.groupImage.kf.setImage(with: url)
     }
 }

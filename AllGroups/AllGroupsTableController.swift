@@ -10,7 +10,6 @@ import UIKit
 class AllGroupsTableController: UITableViewController {
     
     let networkManager = NetworkManager()
-    
     var allGroups = [Community]()
     var filteredGroups = [Community]()
     var searchBarIsEmpty: Bool {
@@ -21,27 +20,21 @@ class AllGroupsTableController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
     let searchController = UISearchController(searchResultsController: nil)
-    var allGroupsSections = [AllGroupsSection]()
+    var allGroupsSections = [GroupsSection]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        networkManager.getCommunity(onComplete: { [weak self] (communities) in
-            self?.allGroups = communities
-            
-            let allGroupsDictionary = Dictionary.init(grouping: communities) {
-                $0.name.prefix(1)
+        networkManager.searchCommunity(token: Session.shared.token, group: " ") { [weak self] (allGroups) in
+            self?.allGroups = allGroups
+            let allGroupsDictionary = Dictionary.init(grouping: allGroups) {
+                $0.groupName.prefix(1)
             }
-            self?.allGroupsSections = allGroupsDictionary.map { AllGroupsSection(title: String($0.key), items: $0.value) }
+            self?.allGroupsSections = allGroupsDictionary.map { GroupsSection(title: String($0.key), items: $0.value) }
             self?.allGroupsSections.sort { $0.title < $1.title }
-            
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
-        }) { (error) in
-            print(error)
         }
-        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск..."
@@ -81,7 +74,7 @@ class AllGroupsTableController: UITableViewController {
         } else {
             groups = allGroupsSections[indexPath.section].items[indexPath.row]
         }
-//        cell.groupImage.image = groups.avatarURL
+        //        cell.groupImage.image = groups.avatarURL
         cell.configure(with: groups)
         return cell
     }
@@ -108,7 +101,7 @@ extension AllGroupsTableController: UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String) {
         filteredGroups = allGroups.filter({ (allGroups: Community) -> Bool in
-            return allGroups.name.lowercased().contains(searchText.lowercased())
+            return allGroups.groupName.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
