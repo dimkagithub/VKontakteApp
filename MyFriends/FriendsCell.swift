@@ -12,7 +12,7 @@ class FriendsCell: UITableViewCell {
     
     @IBOutlet weak var friendImage: UIImageView!
     @IBOutlet weak var friendName: UILabel!
-    @IBOutlet weak var friendStatus: UILabel!
+    @IBOutlet weak var friendCity: UILabel!
     @IBOutlet weak var friendStatusView: UIImageView!
     @IBOutlet weak var friendImageView: SetImageShadow!
     @IBAction func avatarAnimate(_ sender: UIButton) {
@@ -21,10 +21,10 @@ class FriendsCell: UITableViewCell {
     
     func configure(with user: Friend) {
         self.friendName.text = "\(user.lastName) \(user.firstName)"
-        let url = URL(string: user.avatarURL)
+        let url = URL(string: user.image)
         self.friendImage.kf.setImage(with: url)
-        self.friendStatus.textColor = .gray
-        self.friendStatus.text = user.status
+        self.friendCity.textColor = .gray
+        self.friendCity.text = ("\(user.city?.title ?? "")")
         if user.onlineStatus == 1 {
             self.friendStatusView.isHidden = false
         } else {

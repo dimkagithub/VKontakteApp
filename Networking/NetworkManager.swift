@@ -7,307 +7,109 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class NetworkManager {
     
-    var urlConstructor = URLComponents()
-    let constants = NetworkConstants()
-    let configuration: URLSessionConfiguration!
-    let session: URLSession!
+    private static let baseURL = "https://api.vk.com"
+    private static let version = "5.130"
     
-    init(){
-        urlConstructor.scheme = "https"
-        urlConstructor.host = "api.vk.com"
-        configuration = URLSessionConfiguration.default
-        session = URLSession(configuration: configuration)
-    }
-    
-    func getAuthorizeRequest() -> URLRequest? {
-        urlConstructor.host = "oauth.vk.com"
-        urlConstructor.path = "/authorize"
+    func getPhoto(for userId: Int, completion: @escaping ([Photo]) -> Void) {
+        let path = "/method/photos.getAll"
         
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "client_id", value: constants.clientID),
-            URLQueryItem(name: "scope", value: constants.scope),
-            URLQueryItem(name: "display", value: "mobile"),
-            URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: constants.APIversion)
+        let params: Parameters = [
+            "access_token": Session.shared.token,
+            "v": NetworkManager.version,
+            "extended": 1,
+            "owner_id": "\(userId)"
         ]
         
-        guard let url = urlConstructor.url else { return nil }
-        let request = URLRequest(url: url)
-        return request
-    }
-    
-    func getPhoto(for ownerID: Int?, onComplete: @escaping ([Photo]) -> Void, onError: @escaping (Error) -> Void) {
-        urlConstructor.path = "/method/photos.getAll"
-        
-        guard let owner = ownerID else { return }
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "owner_id", value: String(owner)),
-            URLQueryItem(name: "photo_sizes", value: "1"),
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "count", value: "20"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            guard let photos = try? JSONDecoder().decode(Response<Photo>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            onComplete(photos)
-        }
-        task.resume()
-    }
-    
-    func getNews(onComplete: @escaping ([NewsModel]) -> Void, onError: @escaping (Error) -> Void) {
-        urlConstructor.path = "/method/newsfeed.get"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "filters", value: "post"),
-            URLQueryItem(name: "start_from", value: "next_from"),
-            URLQueryItem(name: "count", value: "20"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            guard let news = try? JSONDecoder().decode(Response<NewsModel>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            onComplete(news)
-        }
-        task.resume()
-    }
-    
-    func getCommunity(onComplete: @escaping ([Community]) -> Void, onError: @escaping (Error) -> Void) {
-        urlConstructor.path = "/method/groups.get"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "fields", value: "description"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            guard let communities = try? JSONDecoder().decode(Response<Community>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            onComplete(communities)
-        }
-        task.resume()
-    }
-    
-    func getSearchCommunity(text: String, onComplete: @escaping ([Community]) -> Void, onError: @escaping (Error) -> Void) {
-        urlConstructor.path = "/method/groups.search"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "q", value: text),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            guard let communities = try? JSONDecoder().decode(Response<Community>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            onComplete(communities)
-        }
-        task.resume()
-    }
-    
-    func getFriends(onComplete: @escaping ([Friend]) -> Void, onError: @escaping (Error) -> Void) {
-        urlConstructor.path = "/method/friends.get"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "order", value: "name"),
-            URLQueryItem(name: "fields", value: "online, status, sex, bdate, city, country, photo_100, photo_200_orig"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            guard let friends = try? JSONDecoder().decode(Response<Friend>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            onComplete(friends)
-        }
-        task.resume()
-    }
-    
-    func getOnlineFriends(onComplete: @escaping ([Friend]) -> Void, onError: @escaping (Error) -> Void) {
-        urlConstructor.path = "/method/friends.getOnline"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "order", value: "name"),
-            URLQueryItem(name: "fields", value: "online, status, sex, bdate, city, country, photo_100, photo_200_orig"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            guard let friends = try? JSONDecoder().decode(Response<Friend>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            onComplete(friends)
-        }
-        task.resume()
-    }
-    
-    func getFiles( onComplete: @escaping ([FileModel]) -> Void, onError: @escaping (Error) -> Void){
-        urlConstructor.path = "/method/docs.get"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "count", value: "0"),
-            URLQueryItem(name: "type", value: "0"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            guard let data = data else {
-                onError(ServerError.noDataProvided)
-                return
-            }
-            
-            guard let files = try? JSONDecoder().decode(Response<FileModel>.self, from: data).response.items else {
-                onError(ServerError.failedToDecode)
-                return
-            }
-            onComplete(files)
-        }
-        task.resume()
-    }
-    
-    func editFile(id: Int, newName name: String, onComplete: @escaping () -> Void, onError: @escaping (Error) -> Void){
-        urlConstructor.path = "/method/docs.edit"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "doc_id", value: "\(id)"),
-            URLQueryItem(name: "title", value: "\(name)"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            if response != nil {
-                onComplete()
-            }
-        }
-        task.resume()
-    }
-    
-    func deleteFile(file: FileModel, onComplete: @escaping () -> Void, onError: @escaping (Error) -> Void){
-        urlConstructor.path = "/method/docs.delete"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "owner_id", value: "\(file.ownerID)"),
-            URLQueryItem(name: "doc_id", value: "\(file.id)"),
-            URLQueryItem(name: "access_token", value: Session.shared.token),
-            URLQueryItem(name: "v", value: constants.APIversion),
-        ]
-        
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            if error != nil {
-                onError(ServerError.errorTask)
-            }
-            
-            if response != nil {
-                onComplete()
-            }
-        }
-        task.resume()
-    }
-    
-    func loadImageFromURL(url: URL) -> UIImage? {
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-                return image
-            }
-        }
-        return nil
-    }
-    
-    // Стоит вынести в отдельный класс?
-    func downloadFile(_ file: FileModel, isUserInitiated: Bool, completion: @escaping (_ success: Bool,_ filrLocation: URL?) -> Void){
-        
-        let fileURL = URL(string: file.url)
-        let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let destinationURL = documentDirectoryURL.appendingPathComponent("\(file.id)" + "." + "\(file.ext)" )
-        
-        if FileManager.default.fileExists(atPath: destinationURL.path){
-            debugPrint("Файл уже был загружен")
-            completion(true, destinationURL)
-        } else if isUserInitiated{
-            URLSession.shared.downloadTask(with: fileURL!, completionHandler: { (location, response, error) -> Void in
-                guard let tempLocation = location, error == nil else { return }
-                do {
-                    try FileManager.default.moveItem(at: tempLocation, to: destinationURL)
-                    completion(true, destinationURL)
-                    print("Файл загружен")
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                    completion(false,nil)
+        AF.request(NetworkManager.baseURL + path,
+                   method: .get,
+                   parameters: params)
+            .response { response in
+                switch response.result {
+                case .success(let data):
+                    guard
+                        let data = data else { return }
+                    let json = JSON(data)
+                    let photoJSONs = json["response"]["items"].arrayValue
+                    let photos = photoJSONs.compactMap { Photo($0) }
+                    completion(photos)
+                case .failure(let error):
+                    print(error)
                 }
-            }).resume()
+            }
+    }
+    
+    func getCommunity(completion: @escaping ([Community]) -> Void) {
+        let path = "/method/groups.get"
+        
+        let params: Parameters = [
+            "access_token": Session.shared.token,
+            "v": NetworkManager.version,
+            "extended": 1
+        ]
+        
+        AF.request(NetworkManager.baseURL + path,
+                   method: .get,
+                   parameters: params)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let json = JSON(data)
+                    let groupJSONs = json["response"]["items"].arrayValue
+                    let groups = groupJSONs.compactMap { Community($0) }
+                    completion(groups)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func getFriends(completion: @escaping ([Friend]) -> Void) {
+        let path = "/method/friends.get"
+        
+        let params: Parameters = [
+            "access_token": Session.shared.token,
+            "v": NetworkManager.version,
+            "fields": "photo_200, online, status, city"
+        ]
+        
+        AF.request(NetworkManager.baseURL + path,
+                   method: .get,
+                   parameters: params)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let json = JSON(data)
+                    let friendsJSONList = json["response"]["items"].arrayValue
+                    let friends = friendsJSONList.compactMap { Friend($0) }
+                    completion(friends)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func searchCommunity(token: String, group name: String, completion: @escaping ([Community]) -> Void) {
+        let path = "/method/groups.search"
+        
+        let params: Parameters = [
+            "access_token": Session.shared.token,
+            "q": name,
+            "v": NetworkManager.version
+        ]
+        AF.request(NetworkManager.baseURL + path, method: .get, parameters: params).responseData { response in
+            switch response.result {
+            case.success(let data):
+                let json = JSON(data)
+                let community = json["response"]["items"].arrayValue
+                let allCommunity = community.compactMap{ Community($0) }
+                completion(allCommunity)
+            case.failure(let error):
+                print(error)
+            }
         }
     }
 }

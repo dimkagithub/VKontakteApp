@@ -27,7 +27,7 @@ class MyFriendsTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkManager.getFriends(onComplete: { [weak self] (myFriends) in
+        networkManager.getFriends() { [weak self] (myFriends) in
             self?.myFriends = myFriends
             
             let friendsDictionary = Dictionary.init(grouping: myFriends) {
@@ -39,8 +39,6 @@ class MyFriendsTableController: UITableViewController {
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
-        }) { (error) in
-            print(error)
         }
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -51,7 +49,7 @@ class MyFriendsTableController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        animateTable()
+        //        animateTable()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

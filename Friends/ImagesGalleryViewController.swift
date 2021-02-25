@@ -31,9 +31,8 @@ class ImagesGalleryViewController: UIViewController {
         super.viewWillAppear(animated)
         let gestPan = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
         view.addGestureRecognizer(gestPan)
-        
         networkManager.getPhoto(for: friend.id) { [weak self] (photos) in
-            self?.userImages = photos.compactMap { $0.sizes[$0.sizes.count - 1].url }
+            self?.userImages = photos.compactMap { $0.sizes[$0.sizes.count - 1].urlString }
             if let userImages = self?.userImages {
                 self?.getDataFromURLs(urls: userImages, completion: { (image) in
                     self?.images.append(image)
@@ -43,8 +42,6 @@ class ImagesGalleryViewController: UIViewController {
                     }
                 })
             }
-        } onError: { (error) in
-            print(error.localizedDescription)
         }
     }
     

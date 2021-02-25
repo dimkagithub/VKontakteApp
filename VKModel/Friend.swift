@@ -6,28 +6,49 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 import RealmSwift
 
-class Friend: Object, Codable {
+class Friend: Object {
     @objc dynamic var id: Int = 0
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
-    @objc dynamic var avatarURL: String = ""
+    @objc dynamic var image: String = ""
     @objc dynamic var status: String = ""
-    @objc dynamic var onlineStatus: Int = 0
+    @objc dynamic var onlineStatus: Int = Int()
+    var city: City?
     
-    convenience init(id: Int, firstName: String, lastName: String, avatarURL: String, status: String, onlineStatus: Int) {
+    convenience init(_ json: JSON) {
+        self.init()
+        self.id = json["id"].intValue
+        self.firstName = json["first_name"].stringValue
+        self.lastName = json["last_name"].stringValue
+        self.image = json["photo_200"].stringValue
+        self.status = json["status"].stringValue
+        self.onlineStatus = json["online"].intValue
+        let cityTitle = json["city"]["title"].stringValue
+        self.city = City(title: cityTitle)
+    }
+    
+    convenience init(id: Int, firstName: String, lastName: String, image: String, status: String, onlineStatus: Int, city: City?) {
         self.init()
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
-        self.avatarURL = avatarURL
+        self.image = image
         self.status = status
         self.onlineStatus = onlineStatus
+        self.city = city
     }
+}
+
+class City: Object {
+    @objc dynamic var title: String = ""
     
-    enum CodingKeys: String, CodingKey {
-        case id, firstName = "first_name", lastName = "last_name", avatarURL = "photo_100", onlineStatus = "online", status = "status"
+    convenience init(title: String) {
+        self.init()
+        self.title = title
     }
 }
 
