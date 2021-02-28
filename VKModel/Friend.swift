@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
 import RealmSwift
+import SwiftyJSON
 
 class Friend: Object {
     @objc dynamic var id: Int = 0
@@ -18,6 +17,8 @@ class Friend: Object {
     @objc dynamic var status: String = ""
     @objc dynamic var onlineStatus: Int = Int()
     var city: City?
+    var lastSeen: LastSeen?
+    @objc dynamic var birthDay: String = ""
     
     convenience init(_ json: JSON) {
         self.init()
@@ -29,9 +30,13 @@ class Friend: Object {
         self.onlineStatus = json["online"].intValue
         let cityTitle = json["city"]["title"].stringValue
         self.city = City(title: cityTitle)
+        let seenTime = json["last_seen"]["time"].intValue
+        let seenPlatform = json["last_seen"]["platform"].intValue
+        self.lastSeen = LastSeen(time: seenTime, platform: seenPlatform)
+        self.birthDay = json["bdate"].stringValue
     }
     
-    convenience init(id: Int, firstName: String, lastName: String, image: String, status: String, onlineStatus: Int, city: City?) {
+    convenience init(id: Int, firstName: String, lastName: String, image: String, status: String, onlineStatus: Int, city: City?, lastSeen: LastSeen?, birthDay: String ) {
         self.init()
         self.id = id
         self.firstName = firstName
@@ -40,6 +45,8 @@ class Friend: Object {
         self.status = status
         self.onlineStatus = onlineStatus
         self.city = city
+        self.lastSeen = lastSeen
+        self.birthDay = birthDay
     }
 }
 
@@ -52,7 +59,18 @@ class City: Object {
     }
 }
 
-class MyVKFriendsSections: Object {
+class LastSeen: Object {
+    @objc dynamic var time: Int = 0
+    @objc dynamic var platform: Int = 0
+    
+    convenience init(time: Int, platform: Int) {
+        self.init()
+        self.time = time
+        self.platform = platform
+    }
+}
+
+class FriendsSections: Object {
     @objc dynamic var title: String = ""
     var items: [Friend] = []
     

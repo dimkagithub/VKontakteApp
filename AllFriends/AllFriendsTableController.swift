@@ -1,15 +1,15 @@
 //
-//  MyFriendsTableController.swift
+//  AllFriendsTableController.swift
 //  VKontakteApp
 //
-//  Created by Дмитрий on 10.12.2020.
+//  Created by Дмитрий on 26.02.2021.
 //
 
 import UIKit
 
-class MyFriendsTableController: UITableViewController {
+class AllFriendsTableController: UITableViewController {
     
-    var myFriends = [Friend]()
+    var allFriends = [Friend]()
     var filteredFriends = [Friend]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -26,10 +26,10 @@ class MyFriendsTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkManager.getFriends() { [weak self] (myFriends) in
-            self?.myFriends = myFriends
+        networkManager.getFriends() { [weak self] (allFriends) in
+            self?.allFriends = allFriends
             
-            let friendsDictionary = Dictionary.init(grouping: myFriends) {
+            let friendsDictionary = Dictionary.init(grouping: allFriends) {
                 $0.lastName.prefix(1)
             }
             self?.friendSections = friendsDictionary.map { FriendsSections(title: String($0.key), items: $0.value) }
@@ -70,7 +70,7 @@ class MyFriendsTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as? MyFriendsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AllFriendsCell", for: indexPath) as? AllFriendsCell
         else { return UITableViewCell() }
         var friends: Friend
         if filtering {
@@ -113,13 +113,13 @@ class MyFriendsTableController: UITableViewController {
     }
 }
 
-extension MyFriendsTableController: UISearchResultsUpdating {
+extension AllFriendsTableController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
     func filterContentForSearchText(_ searchText: String) {
-        filteredFriends = myFriends.filter({ (myFriends: Friend) -> Bool in
-            return myFriends.lastName.lowercased().contains(searchText.lowercased())
+        filteredFriends = allFriends.filter({ (allFriends: Friend) -> Bool in
+            return allFriends.lastName.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
