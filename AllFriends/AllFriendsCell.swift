@@ -1,14 +1,14 @@
 //
-//  FriendsCell.swift
+//  AllFriendsCell.swift
 //  VKontakteApp
 //
-//  Created by Дмитрий on 10.12.2020.
+//  Created by Дмитрий on 26.02.2021.
 //
 
 import UIKit
 import Kingfisher
 
-class FriendsCell: UITableViewCell {
+class AllFriendsCell: UITableViewCell {
     
     @IBOutlet weak var friendImage: UIImageView!
     @IBOutlet weak var friendName: UILabel!
