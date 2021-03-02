@@ -901,7 +901,7 @@
                                     <outlet property="groupImage" destination="u5t-P9-BSv" id="KJy-uq-7ho"/>
                                     <outlet property="groupImageView" destination="fqL-0i-y8M" id="C7E-Rf-KLm"/>
                                     <outlet property="groupName" destination="0fd-c1-dne" id="TK4-a7-rKh"/>
-                                    <segue destination="1gE-De-T6F" kind="unwind" identifier="addGroup" unwindAction="addGroupWithSegue:" id="lbt-dw-TYK"/>
+                                    <segue destination="2Ct-pc-TdF" kind="show" id="0kj-Vk-FSX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -913,7 +913,6 @@
                     <navigationItem key="navigationItem" title="Сообщества" id="OcH-za-nLc"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1h6-fV-Rwd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="1gE-De-T6F" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="6914" y="841"/>
         </scene>
@@ -1087,6 +1086,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PcC-KM-AEF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7869" y="-754"/>
+        </scene>
+        <!--В разработке-->
+        <scene sceneID="zfb-dX-sBC">
+            <objects>
+                <viewController id="2Ct-pc-TdF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3ik-Fy-S5v">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="underconstruction" translatesAutoresizingMaskIntoConstraints="NO" id="nw1-Vl-WnE">
+                                <rect key="frame" x="16" y="314" width="358" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vYa-gT-APJ"/>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="В разработке" id="mW6-eR-WtJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFB-Oa-A6Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7868" y="841"/>
         </scene>
     </scenes>
     <resources>

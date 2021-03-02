@@ -19,6 +19,8 @@ class Friend: Object {
     var city: City?
     var lastSeen: LastSeen?
     @objc dynamic var birthDay: String = ""
+    @objc dynamic var domain: String = ""
+    var occupation: Occupation?
     
     convenience init(_ json: JSON) {
         self.init()
@@ -34,9 +36,14 @@ class Friend: Object {
         let seenPlatform = json["last_seen"]["platform"].intValue
         self.lastSeen = LastSeen(time: seenTime, platform: seenPlatform)
         self.birthDay = json["bdate"].stringValue
+        self.domain = json["domain"].stringValue
+        let occupationType = json["occupation"]["type"].stringValue
+        let occupationID = json["occupation"]["id"].intValue
+        let occupationName = json["occupation"]["name"].stringValue
+        self.occupation = Occupation(type: occupationType, id: occupationID, name: occupationName)
     }
     
-    convenience init(id: Int, firstName: String, lastName: String, image: String, status: String, onlineStatus: Int, city: City?, lastSeen: LastSeen?, birthDay: String ) {
+    convenience init(id: Int, firstName: String, lastName: String, image: String, status: String, onlineStatus: Int, city: City?, lastSeen: LastSeen?, birthDay: String, domain: String, occupation: Occupation?) {
         self.init()
         self.id = id
         self.firstName = firstName
@@ -47,6 +54,8 @@ class Friend: Object {
         self.city = city
         self.lastSeen = lastSeen
         self.birthDay = birthDay
+        self.domain = domain
+        self.occupation = occupation
     }
 }
 
@@ -67,6 +76,19 @@ class LastSeen: Object {
         self.init()
         self.time = time
         self.platform = platform
+    }
+}
+
+class Occupation: Object {
+    @objc dynamic var type: String = ""
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    
+    convenience init(type: String, id: Int, name: String) {
+        self.init()
+        self.type = type
+        self.id = id
+        self.name = name
     }
 }
 
