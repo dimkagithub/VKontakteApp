@@ -73,7 +73,7 @@ class NetworkManager {
         let params: Parameters = [
             "access_token": Session.shared.token,
             "v": NetworkManager.version,
-            "fields": "photo_200, online, status, city, last_seen, bdate"
+            "fields": "photo_200, online, status, city, last_seen, bdate, domain, occupation"
         ]
         
         AF.request(NetworkManager.baseURL + path,
