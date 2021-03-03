@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsTableController: UITableViewController {
     
     let networkManager = NetworkManager()
-    var myGroups = [Community]()
+    var myGroups = try? Realm().objects(Community.self)
     var filteredMyGroups = [Community]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -25,7 +26,6 @@ class MyGroupsTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         networkManager.getCommunity() { [weak self] (allGroups) in
-            self?.myGroups = allGroups
             let myGroupsDictionary = Dictionary.init(grouping: allGroups) {
                 $0.groupName.prefix(1)
             }
@@ -44,7 +44,7 @@ class MyGroupsTableController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        animateTable()
+        //        animateTable()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -99,7 +99,7 @@ extension MyGroupsTableController: UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        filteredMyGroups = myGroups.filter({ (allGroups: Community) -> Bool in
+        filteredMyGroups = myGroups!.filter({ (allGroups: Community) -> Bool in
             return allGroups.groupName.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()

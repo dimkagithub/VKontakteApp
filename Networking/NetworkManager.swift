@@ -36,6 +36,7 @@ class NetworkManager {
                     let photoJSONs = json["response"]["items"].arrayValue
                     let photos = photoJSONs.compactMap { Photo($0) }
                     completion(photos)
+                    try? RealmManager.save(items: photos)
                 case .failure(let error):
                     print(error)
                 }
@@ -61,6 +62,7 @@ class NetworkManager {
                     let groupJSONs = json["response"]["items"].arrayValue
                     let groups = groupJSONs.compactMap { Community($0) }
                     completion(groups)
+                    try? RealmManager.save(items: groups)
                 case .failure(let error):
                     print(error)
                 }
@@ -86,6 +88,7 @@ class NetworkManager {
                     let friendsJSONList = json["response"]["items"].arrayValue
                     let friends = friendsJSONList.compactMap { Friend($0) }
                     completion(friends)
+                    try? RealmManager.save(items: friends)
                 case .failure(let error):
                     print(error)
                 }
@@ -100,6 +103,7 @@ class NetworkManager {
             "q": name,
             "v": NetworkManager.version
         ]
+        
         AF.request(NetworkManager.baseURL + path, method: .get, parameters: params).responseData { response in
             switch response.result {
             case.success(let data):
@@ -107,6 +111,7 @@ class NetworkManager {
                 let community = json["response"]["items"].arrayValue
                 let allCommunity = community.compactMap{ Community($0) }
                 completion(allCommunity)
+                try? RealmManager.save(items: allCommunity)
             case.failure(let error):
                 print(error)
             }

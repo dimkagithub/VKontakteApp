@@ -27,6 +27,10 @@ class Community: Object {
         self.groupName = groupName
         self.groupImage = groupImage
     }
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }
 
 class GroupsSection: Object {

@@ -57,6 +57,10 @@ class Friend: Object {
         self.domain = domain
         self.occupation = occupation
     }
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }
 
 class City: Object {
