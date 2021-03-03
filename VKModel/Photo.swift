@@ -24,6 +24,10 @@ class Photo: Object {
         self.id = id
         self.sizes = sizes
     }
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }
 
 class PhotoSize: Object {

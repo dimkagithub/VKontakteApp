@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyFriendsTableController: UITableViewController {
     
-    var myFriends = [Friend]()
+    var myFriends = try? Realm().objects(Friend.self)
     var filteredFriends = [Friend]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -27,8 +28,6 @@ class MyFriendsTableController: UITableViewController {
         super.viewDidLoad()
         
         networkManager.getFriends() { [weak self] (myFriends) in
-            self?.myFriends = myFriends
-            
             let friendsDictionary = Dictionary.init(grouping: myFriends) {
                 $0.lastName.prefix(1)
             }
@@ -118,7 +117,7 @@ extension MyFriendsTableController: UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
     }
     func filterContentForSearchText(_ searchText: String) {
-        filteredFriends = myFriends.filter({ (myFriends: Friend) -> Bool in
+        filteredFriends = myFriends!.filter({ (myFriends: Friend) -> Bool in
             return myFriends.lastName.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()

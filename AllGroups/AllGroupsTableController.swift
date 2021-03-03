@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AllGroupsTableController: UITableViewController {
     
     let networkManager = NetworkManager()
-    var allGroups = [Community]()
+    var allGroups = try? Realm().objects(Community.self)
     var filteredGroups = [Community]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -25,7 +26,6 @@ class AllGroupsTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         networkManager.searchCommunity(token: Session.shared.token, group: " ") { [weak self] (allGroups) in
-            self?.allGroups = allGroups
             let allGroupsDictionary = Dictionary.init(grouping: allGroups) {
                 $0.groupName.prefix(1)
             }
