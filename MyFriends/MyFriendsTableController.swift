@@ -10,7 +10,10 @@ import RealmSwift
 
 class MyFriendsTableController: UITableViewController {
     
-    var myFriends = try? Realm().objects(Friend.self)
+    private var myFriends: Results<Friend>? {
+        let myFriend: Results<Friend>? = realmManager?.getObjects()
+        return myFriend?.sorted(byKeyPath: "id", ascending: true)
+    }
     var filteredFriends = [Friend]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -22,7 +25,8 @@ class MyFriendsTableController: UITableViewController {
     }
     let searchController = UISearchController(searchResultsController: nil)
     var friendSections = [FriendsSections]()
-    let networkManager = NetworkManager()
+    private let networkManager = NetworkManager()
+    private let realmManager = RealmManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,7 @@ class MyFriendsTableController: UITableViewController {
             self?.friendSections.sort { $0.title < $1.title }
             
             DispatchQueue.main.async {
+                try? self?.realmManager?.add(objects: myFriends)
                 self?.tableView.reloadData()
             }
         }

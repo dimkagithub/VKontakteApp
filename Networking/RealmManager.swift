@@ -9,18 +9,41 @@ import Foundation
 import RealmSwift
 
 class RealmManager {
-    static let deleteMigration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-    static func save<T: Object>(items: [T],
-                                configuratuon: Realm.Configuration = deleteMigration,
-                                update: Realm.UpdatePolicy = .modified) throws {
-        do {
-            let realm = try Realm(configuration: configuratuon)
-            print(configuratuon.fileURL ?? "")
-            realm.beginWrite()
-            realm.add(items, update: update)
-            try realm.commitWrite()
-        } catch {
-            print(error)
+    
+    static let shared = RealmManager()
+    private let realm: Realm
+    private init?() {
+        let configurator = Realm.Configuration(schemaVersion: 1, deleteRealmIfMigrationNeeded: true)
+        guard let realm = try? Realm(configuration: configurator) else { return nil }
+        self.realm = realm
+        print(realm.configuration.fileURL ?? "")
+    }
+    
+    func add<T: Object>(object: T) throws {
+        try realm.write {
+            realm.add(object)
+        }
+    }
+    
+    func add<T: Object>(objects: [T]) throws {
+        try realm.write {
+            realm.add(objects, update: .all)
+        }
+    }
+    
+    func getObjects<T: Object>() -> Results<T> {
+        return realm.objects(T.self)
+    }
+    
+    func delete<T: Object>(object: T) throws {
+        try realm.write {
+            realm.delete(object)
+        }
+    }
+    
+    func deleteAll() throws {
+        try realm.write {
+            realm.deleteAll()
         }
     }
 }

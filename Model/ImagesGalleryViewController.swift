@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ImagesGalleryViewController: UIViewController {
     
-    let networkManager = NetworkManager()
+    private let networkManager = NetworkManager()
+    private let realmManager = RealmManager.shared
     var images = [UIImage?]()
     var selectedPhoto = 0
     var leftImageView: UIImageView!
@@ -36,6 +38,7 @@ class ImagesGalleryViewController: UIViewController {
                 self?.getDataFromURLs(urls: userImages, completion: { (image) in
                     self?.images.append(image)
                     DispatchQueue.main.async {
+                        try? self?.realmManager?.add(objects: photos)
                         self?.setImage()
                         self?.startAnimate()
                     }
