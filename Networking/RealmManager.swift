@@ -13,10 +13,14 @@ class RealmManager {
     static func save<T: Object>(items: [T],
                                 configuratuon: Realm.Configuration = deleteMigration,
                                 update: Realm.UpdatePolicy = .modified) throws {
-        let realm = try Realm(configuration: configuratuon)
-        print(configuratuon.fileURL ?? "")
-        try realm.write {
+        do {
+            let realm = try Realm(configuration: configuratuon)
+            print(configuratuon.fileURL ?? "")
+            realm.beginWrite()
             realm.add(items, update: update)
+            try realm.commitWrite()
+        } catch {
+            print(error)
         }
     }
 }
