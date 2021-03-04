@@ -10,8 +10,12 @@ import RealmSwift
 
 class MyGroupsTableController: UITableViewController {
     
-    let networkManager = NetworkManager()
-    var myGroups = try? Realm().objects(Community.self)
+    private let networkManager = NetworkManager()
+    private let realmManager = RealmManager.shared
+    private var myGroups: Results<Community>? {
+        let myGroups: Results<Community>? = realmManager?.getObjects()
+        return myGroups?.sorted(byKeyPath: "id", ascending: true)
+    }
     var filteredMyGroups = [Community]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -25,13 +29,14 @@ class MyGroupsTableController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkManager.getCommunity() { [weak self] (allGroups) in
-            let myGroupsDictionary = Dictionary.init(grouping: allGroups) {
+        networkManager.getCommunity() { [weak self] (myGroups) in
+            let myGroupsDictionary = Dictionary.init(grouping: myGroups) {
                 $0.groupName.prefix(1)
             }
             self?.myGroupsSections = myGroupsDictionary.map { GroupsSection(title: String($0.key), items: $0.value) }
             self?.myGroupsSections.sort { $0.title < $1.title }
             DispatchQueue.main.async {
+                try? self?.realmManager?.add(objects: myGroups)
                 self?.tableView.reloadData()
             }
         }
