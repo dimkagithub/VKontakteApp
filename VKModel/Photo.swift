@@ -11,18 +11,23 @@ import SwiftyJSON
 
 class Photo: Object {
     @objc dynamic var id: Int = 0
-    var sizes: [PhotoSize] = []
+    var sizes = List<PhotoSize>()
     
     convenience init(_ json: JSON) {
         self.init()
         self.id = json["id"].intValue
-        self.sizes = json["sizes"].arrayValue.compactMap{ PhotoSize($0) }
+        let tempArray: [PhotoSize] = json["sizes"].arrayValue.compactMap{ PhotoSize($0) }
+        tempArray.forEach{ (potosize) in
+            self.sizes.append(potosize)
+        }
     }
     
     convenience init(id: Int, sizes: [PhotoSize]) {
         self.init()
         self.id = id
-        self.sizes = sizes
+        sizes.forEach{ (photosize) in
+            self.sizes.append(photosize)
+        }
     }
     
     override class func primaryKey() -> String? {

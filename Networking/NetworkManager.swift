@@ -111,7 +111,6 @@ class NetworkManager {
                 let community = json["response"]["items"].arrayValue
                 let allCommunity = community.compactMap{ Community($0) }
                 completion(allCommunity)
-                try? RealmManager.save(items: allCommunity)
             case.failure(let error):
                 print(error)
             }
