@@ -11,9 +11,11 @@ import RealmSwift
 class MyFriendsTableController: UITableViewController {
     
     private var myFriends: Results<Friend>? {
-        let myFriend: Results<Friend>? = realmManager?.getObjects()
-        return myFriend?.sorted(byKeyPath: "id", ascending: true)
+        didSet {
+            tableView.reloadData()
+        }
     }
+    var token: NotificationToken?
     var filteredFriends = [Friend]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -28,27 +30,42 @@ class MyFriendsTableController: UITableViewController {
     private let networkManager = NetworkManager()
     private let realmManager = RealmManager.shared
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        networkManager.getFriends() { [weak self] (myFriends) in
-            let friendsDictionary = Dictionary.init(grouping: myFriends) {
-                $0.lastName.prefix(1)
-            }
-            self?.friendSections = friendsDictionary.map { FriendsSections(title: String($0.key), items: $0.value) }
-            self?.friendSections.sort { $0.title < $1.title }
-            
-            DispatchQueue.main.async {
-                try? self?.realmManager?.add(objects: myFriends)
-                self?.tableView.reloadData()
+    func pairTableAndRealm() {
+        guard let realm = try? Realm() else { return }
+        myFriends = realm.objects(Friend.self)
+        self.token = myFriends?.observe{ [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self!.tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, _, _, _):
+                self?.networkManager.getFriends() { [weak self] (myFriends) in
+                    let friendsDictionary = Dictionary.init(grouping: myFriends) {
+                        $0.lastName.prefix(1)
+                    }
+                    self?.friendSections = friendsDictionary.map { FriendsSections(title: String($0.key), items: $0.value) }
+                    self?.friendSections.sort { $0.title < $1.title }
+                    
+                    DispatchQueue.main.async {
+                        try? self?.realmManager?.add(objects: myFriends)
+                        self?.tableView.reloadData()
+                    }
+                }
+            case .error(let error):
+                fatalError("\(error)")
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск..."
         searchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        pairTableAndRealm()
     }
     
     override func viewWillAppear(_ animated: Bool) {

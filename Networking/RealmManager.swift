@@ -46,4 +46,10 @@ class RealmManager {
             realm.deleteAll()
         }
     }
+    
+    func update(closure: (() -> Void)) throws {
+        try realm.write() {
+            closure()
+        }
+    }
 }
