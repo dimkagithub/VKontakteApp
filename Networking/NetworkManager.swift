@@ -98,6 +98,7 @@ class NetworkManager {
         let params: Parameters = [
             "access_token": Session.shared.token,
             "q": name,
+            "count": 100,
             "v": NetworkManager.version
         ]
         
