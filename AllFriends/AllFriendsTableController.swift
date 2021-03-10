@@ -30,7 +30,6 @@ class AllFriendsTableController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         networkManager.getFriends() { [weak self] (allFriends) in
             let friendsDictionary = Dictionary.init(grouping: allFriends) {
                 $0.lastName.prefix(1)
