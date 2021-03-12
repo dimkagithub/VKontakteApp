@@ -12,5 +12,9 @@ target 'VKontakteApp' do
  pod 'SwiftyJSON', '~> 5.0'
  pod 'Kingfisher', '~> 6.1.1'
  pod 'RealmSwift'
+ pod 'Firebase/Core'
+ pod 'Firebase/Database'
+ pod 'Firebase/Auth'
+ pod 'Firebase/Firestore'
 
 end
