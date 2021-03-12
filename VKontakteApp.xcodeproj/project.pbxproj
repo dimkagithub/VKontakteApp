@@ -37,6 +37,8 @@
 		0A90A77B25DFA5E600676D9F /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90A77A25DFA5E600676D9F /* Friend.swift */; };
 		0A90A77E25DFA60300676D9F /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90A77D25DFA60300676D9F /* NewsFeed.swift */; };
 		0A90A78125DFA61900676D9F /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90A78025DFA61900676D9F /* Photo.swift */; };
+		0AABC3D625FBBC7100D989EF /* FireBaseLoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABC3D525FBBC7100D989EF /* FireBaseLoginFormController.swift */; };
+		0AABC3D925FBC78200D989EF /* FireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABC3D825FBC78200D989EF /* FireBase.swift */; };
 		0AAD3D8825861A6D00C396CC /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD3D8725861A6D00C396CC /* ButtonExtension.swift */; };
 		0AB14D8825A8B93200B7689B /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB14D8725A8B93100B7689B /* PopAnimator.swift */; };
 		0AB14D8B25A8B96E00B7689B /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB14D8A25A8B96E00B7689B /* PushAnimator.swift */; };
@@ -97,6 +99,8 @@
 		0A90A77A25DFA5E600676D9F /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		0A90A77D25DFA60300676D9F /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		0A90A78025DFA61900676D9F /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		0AABC3D525FBBC7100D989EF /* FireBaseLoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseLoginFormController.swift; sourceTree = "<group>"; };
+		0AABC3D825FBC78200D989EF /* FireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBase.swift; sourceTree = "<group>"; };
 		0AAD3D8725861A6D00C396CC /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
 		0AB14D8725A8B93100B7689B /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		0AB14D8A25A8B96E00B7689B /* PushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				0A42BE0025789A9F006FA3A9 /* AppDelegate.swift */,
 				0A42BE0225789A9F006FA3A9 /* SceneDelegate.swift */,
 				0A42BE0625789A9F006FA3A9 /* Main.storyboard */,
+				0AABC3D525FBBC7100D989EF /* FireBaseLoginFormController.swift */,
 				0A118894257979C600A58A9F /* LoginFormController.swift */,
 				0AC5F9B825D7A4930047D94E /* VKLoginFormController.swift */,
 				0A42BE0C25789AA1006FA3A9 /* Assets.xcassets */,
@@ -315,6 +320,7 @@
 				0A05876025D7B0ED00C99540 /* Session.swift */,
 				0A8D514125D91B0800D193B6 /* NetworkConstants.swift */,
 				0AFDB90625EFC9BC005AD034 /* RealmManager.swift */,
+				0AABC3D825FBC78200D989EF /* FireBase.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -453,6 +459,7 @@
 				0ADF7985258EA44C00ABFA00 /* News.swift in Sources */,
 				0A90A77E25DFA60300676D9F /* NewsFeed.swift in Sources */,
 				0A42BE0B25789A9F006FA3A9 /* VKontakteApp.xcdatamodeld in Sources */,
+				0AABC3D625FBBC7100D989EF /* FireBaseLoginFormController.swift in Sources */,
 				0A671A64258293F900D12B14 /* MyGroupsTableController.swift in Sources */,
 				0AD20D8525934515009F654D /* ProfileNewsCell.swift in Sources */,
 				0AC5F9B925D7A4930047D94E /* VKLoginFormController.swift in Sources */,
@@ -490,6 +497,7 @@
 				0A0AA99125E9624D009112A2 /* AllFriendsCell.swift in Sources */,
 				0AD20D8E25934565009F654D /* ActionsNewsCell.swift in Sources */,
 				0AD20D8825934541009F654D /* TextNewsCell.swift in Sources */,
+				0AABC3D925FBC78200D989EF /* FireBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
