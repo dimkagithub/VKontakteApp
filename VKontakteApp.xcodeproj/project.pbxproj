@@ -49,6 +49,7 @@
 		0AD20D8825934541009F654D /* TextNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8725934541009F654D /* TextNewsCell.swift */; };
 		0AD20D8B25934554009F654D /* ImageNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8A25934554009F654D /* ImageNewsCell.swift */; };
 		0AD20D8E25934565009F654D /* ActionsNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD20D8D25934565009F654D /* ActionsNewsCell.swift */; };
+		0AD7D96225FA8E8A00EDEC57 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD7D96125FA8E8A00EDEC57 /* GoogleService-Info.plist */; };
 		0ADF7982258E9AC500ABFA00 /* NewsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF7981258E9AC500ABFA00 /* NewsTableController.swift */; };
 		0ADF7985258EA44C00ABFA00 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADF7984258EA44C00ABFA00 /* News.swift */; };
 		0AEE22662590C55100A3C00D /* GetRandomTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEE22652590C55100A3C00D /* GetRandomTime.swift */; };
@@ -108,6 +109,7 @@
 		0AD20D8725934541009F654D /* TextNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNewsCell.swift; sourceTree = "<group>"; };
 		0AD20D8A25934554009F654D /* ImageNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNewsCell.swift; sourceTree = "<group>"; };
 		0AD20D8D25934565009F654D /* ActionsNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsNewsCell.swift; sourceTree = "<group>"; };
+		0AD7D96125FA8E8A00EDEC57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0ADF7981258E9AC500ABFA00 /* NewsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableController.swift; sourceTree = "<group>"; };
 		0ADF7984258EA44C00ABFA00 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		0AEE22652590C55100A3C00D /* GetRandomTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRandomTime.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		0A42BDFF25789A9F006FA3A9 /* VKontakteApp */ = {
 			isa = PBXGroup;
 			children = (
+				0AD7D96125FA8E8A00EDEC57 /* GoogleService-Info.plist */,
 				0A42BE0025789A9F006FA3A9 /* AppDelegate.swift */,
 				0A42BE0225789A9F006FA3A9 /* SceneDelegate.swift */,
 				0A42BE0625789A9F006FA3A9 /* Main.storyboard */,
@@ -385,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A42BE1025789AA1006FA3A9 /* LaunchScreen.storyboard in Resources */,
+				0AD7D96225FA8E8A00EDEC57 /* GoogleService-Info.plist in Resources */,
 				0A42BE0D25789AA1006FA3A9 /* Assets.xcassets in Resources */,
 				0A42BE0825789A9F006FA3A9 /* Main.storyboard in Resources */,
 			);

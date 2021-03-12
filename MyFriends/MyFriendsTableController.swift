@@ -10,10 +10,18 @@ import RealmSwift
 
 class MyFriendsTableController: UITableViewController {
     
+    let myRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
     private var myFriends: Results<Friend>? {
-        let myFriend: Results<Friend>? = realmManager?.getObjects()
-        return myFriend?.sorted(byKeyPath: "id", ascending: true)
+        didSet {
+            tableView.reloadData()
+        }
     }
+    var token: NotificationToken?
     var filteredFriends = [Friend]()
     var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -28,26 +36,70 @@ class MyFriendsTableController: UITableViewController {
     private let networkManager = NetworkManager()
     private let realmManager = RealmManager.shared
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @objc func refreshData(sender: UIRefreshControl) {
         networkManager.getFriends() { [weak self] (myFriends) in
             let friendsDictionary = Dictionary.init(grouping: myFriends) {
                 $0.lastName.prefix(1)
             }
             self?.friendSections = friendsDictionary.map { FriendsSections(title: String($0.key), items: $0.value) }
             self?.friendSections.sort { $0.title < $1.title }
-            
             DispatchQueue.main.async {
                 try? self?.realmManager?.add(objects: myFriends)
+                sender.endRefreshing()
                 self?.tableView.reloadData()
             }
         }
+    }
+    
+    func pairTableAndRealm() {
+        guard let realm = try? Realm() else { return }
+        myFriends = realm.objects(Friend.self)
+        if myFriends!.isEmpty {
+            networkManager.getFriends() { [weak self] (myFriends) in
+                let friendsDictionary = Dictionary.init(grouping: myFriends) {
+                    $0.lastName.prefix(1)
+                }
+                self?.friendSections = friendsDictionary.map { FriendsSections(title: String($0.key), items: $0.value) }
+                self?.friendSections.sort { $0.title < $1.title }
+                DispatchQueue.main.async {
+                    try? self?.realmManager?.add(objects: myFriends)
+                    self?.tableView.reloadData()
+                }
+            }
+        }
+        self.token = myFriends?.observe{ [weak self] (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                //                let friends = self?.myFriends?.map({ (friend) -> Friend in
+                //                    return friend
+                //                })
+                guard let self = self else { return }
+                let friendsDictionary = Dictionary.init(grouping: self.myFriends!) {
+                    $0.lastName.prefix(1)
+                }
+                self.friendSections = friendsDictionary.map { FriendsSections(title: String($0.key), items: $0.value) }
+                self.friendSections.sort { $0.title < $1.title }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .update(_, _, _, _):
+                break
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.refreshControl = myRefreshControl
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск..."
         searchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        pairTableAndRealm()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +110,7 @@ class MyFriendsTableController: UITableViewController {
         if filtering {
             return 1
         } else {
-            return friendSections.count
+            return friendSections.count == 0 ? 1 : friendSections.count
         }
     }
     
@@ -66,6 +118,11 @@ class MyFriendsTableController: UITableViewController {
         if filtering {
             return filteredFriends.count
         }
+        
+        if friendSections.isEmpty {
+            return 0
+        }
+        
         return friendSections[section].items.count
     }
     
@@ -86,6 +143,10 @@ class MyFriendsTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if friendSections.isEmpty {
+            return nil
+        }
+        
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10.0))
         view.backgroundColor = .systemGray5
         let label = UILabel(frame: CGRect(x: 42, y: 5, width: tableView.frame.width - 10, height: 20.0))
