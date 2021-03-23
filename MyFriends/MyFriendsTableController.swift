@@ -10,9 +10,9 @@ import RealmSwift
 
 class MyFriendsTableController: UITableViewController {
     
-    let myRefreshControl: UIRefreshControl = {
+    lazy var myRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         return refreshControl
     }()
     
@@ -36,7 +36,7 @@ class MyFriendsTableController: UITableViewController {
     private let networkManager = NetworkManager()
     private let realmManager = RealmManager.shared
     
-    @objc func refreshData(sender: UIRefreshControl) {
+    @objc func refreshData(_ sender: UIRefreshControl) {
         networkManager.getFriends() { [weak self] (myFriends) in
             let friendsDictionary = Dictionary.init(grouping: myFriends) {
                 $0.lastName.prefix(1)
@@ -45,9 +45,9 @@ class MyFriendsTableController: UITableViewController {
             self?.friendSections.sort { $0.title < $1.title }
             DispatchQueue.main.async {
                 try? self?.realmManager?.add(objects: myFriends)
-                sender.endRefreshing()
                 self?.tableView.reloadData()
             }
+            sender.endRefreshing()
         }
     }
     

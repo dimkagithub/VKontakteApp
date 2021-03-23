@@ -10,6 +10,12 @@ import RealmSwift
 
 class AllFriendsTableController: UITableViewController {
     
+    lazy var myRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
     private var allFriends: Results<Friend>? {
         didSet {
             tableView.reloadData()
@@ -29,6 +35,21 @@ class AllFriendsTableController: UITableViewController {
     var friendSections = [FriendsSections]()
     private let networkManager = NetworkManager()
     private let realmManager = RealmManager.shared
+    
+    @objc func refreshData(_ sender: UIRefreshControl) {
+        networkManager.getFriends() { [weak self] (myFriends) in
+            let friendsDictionary = Dictionary.init(grouping: myFriends) {
+                $0.lastName.prefix(1)
+            }
+            self?.friendSections = friendsDictionary.map { FriendsSections(title: String($0.key), items: $0.value) }
+            self?.friendSections.sort { $0.title < $1.title }
+            DispatchQueue.main.async {
+                try? self?.realmManager?.add(objects: myFriends)
+                self?.tableView.reloadData()
+            }
+            sender.endRefreshing()
+        }
+    }
     
     func pairTableAndRealm() {
         guard let realm = try? Realm() else { return }
@@ -71,6 +92,7 @@ class AllFriendsTableController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.refreshControl = myRefreshControl
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск..."
